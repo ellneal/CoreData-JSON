@@ -1,0 +1,9 @@
+{
+	"CFBundleDevelopmentRegion" = English;
+	CFBundleExecutable = "${EXECUTABLE_NAME}";
+	CFBundleIdentifier = "com.emdentec.${PRODUCT_NAME:rfc1034identifier}";
+	"CFBundleInfoDictionaryVersion" = "6.0";
+	CFBundlePackageType = BNDL;
+	CFBundleSignature = "????";
+	CFBundleVersion = "1.0";
+}
