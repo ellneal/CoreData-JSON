@@ -33,6 +33,14 @@
 
 @implementation TestNumberToStringTransformer
 
++ (Class)transformedValueClass {
+	return [NSString class];
+}
++ (BOOL)allowsReverseTransformation {
+	return YES;
+}
+
+
 - (id)transformedValue:(id)value {
 	
 	NSInteger integer = [value integerValue];

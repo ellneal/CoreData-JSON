@@ -33,6 +33,13 @@
 
 @implementation TestToDateValueTransformer
 
++ (Class)transformedValueClass {
+	return [NSDate class];
+}
++ (BOOL)allowsReverseTransformation {
+	return YES;
+}
+
 - (id)transformedValue:(id)value {
 	
 	NSTimeInterval timeIntervalSince1970 = [value doubleValue];
