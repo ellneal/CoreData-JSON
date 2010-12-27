@@ -49,4 +49,9 @@
 	return ((string == nil) || ([string length] == 0));
 }
 
+- (NSString *)stringByRemovingCharactersInSet:(NSCharacterSet *)characterSet {
+	
+	return [[self componentsSeparatedByCharactersInSet:characterSet] componentsJoinedByString:@""];
+}
+
 @end

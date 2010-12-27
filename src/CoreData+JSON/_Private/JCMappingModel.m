@@ -189,21 +189,18 @@
 	
 	NSString *formatString = [cleanedExpression substringWithRange:rangeOfFormat];
 	NSString *argumentsString = [cleanedExpression substringWithRange:rangeOfArguments];
+	argumentsString = [argumentsString stringByRemovingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+	
+	argumentsString = [argumentsString substringWithRange:NSMakeRange(1, [argumentsString length]-1)];
 	
 	NSArray *arguments = [argumentsString componentsSeparatedByString:@","];
-	NSMutableArray *cleanedArguments = [[[NSMutableArray alloc] initWithCapacity:[arguments count]] autorelease];
 	
-	for (NSString *arg in arguments) {
-		if (![NSString stringIsNilOrEmpty:arg])
-			[cleanedArguments addObject:[arg stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
-	}
-	
-	if ([cleanedArguments count] == 0)
+	if ([arguments count] == 0)
 		return formatString;
 	
-	NSMutableArray *argumentValues = [[NSMutableArray alloc] initWithCapacity:[cleanedArguments count]];
+	NSMutableArray *argumentValues = [[NSMutableArray alloc] initWithCapacity:[arguments count]];
 	
-	for (NSString *mappedKey in cleanedArguments)
+	for (NSString *mappedKey in arguments)
 		[argumentValues addObject:[self valueForMappedKey:mappedKey fromDictionary:dictionary]];
 	
 	NSString *result = [NSString stringWithFormat:formatString array:argumentValues];

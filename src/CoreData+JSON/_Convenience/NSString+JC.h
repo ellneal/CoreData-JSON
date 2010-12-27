@@ -36,4 +36,6 @@
 + (id)stringWithFormat:(NSString *)format array:(NSArray*) arguments;
 + (BOOL)stringIsNilOrEmpty:(NSString *)string;
 
+- (NSString *)stringByRemovingCharactersInSet:(NSCharacterSet *)characterSet;
+
 @end
