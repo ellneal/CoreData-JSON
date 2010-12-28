@@ -102,4 +102,16 @@
 	STAssertNotNil(model, @"JCMappingModel should not be nil after creation with valid mapping model.");
 }
 
+- (void)testEntityDescriptionWithSuperEntity {
+	
+	NSEntityDescription *entity = [FauxEntityDescription entityDescriptionWithName:@"TestSubEntity" superEntity:[FauxEntityDescription entityDescriptionWithName:@"TestSuperEntity"]];
+	
+	JCMappingModel *model = nil;
+	
+	STAssertNoThrow((model = [JCMappingModel mappingModelWithEntity:entity bundle:bundle]), @"Creating JCMappingModel with valid mapping file should not throw Exception.");
+	STAssertNotNil(model, @"JCMappingModel should not be nil after creation with valid mapping model.");
+	STAssertNotNil([model.propertiesMap objectForKey:@"testSuperAttribute"], nil);
+	STAssertNotNil([model.propertiesMap objectForKey:@"testSubAttribute"], nil);
+}
+
 @end

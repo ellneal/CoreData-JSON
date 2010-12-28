@@ -34,6 +34,7 @@
 @interface NSDictionary (JC)
 
 - (NSDictionary *)dictionaryWithAvailableValuesForKeys:(NSArray *)keys;
+- (NSDictionary *)dictionaryByAddingEntriesFromDictionary:(NSDictionary *)otherDictionary;
 
 - (id)nilIfNSNullObjectForKey:(id)key;
 

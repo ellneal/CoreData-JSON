@@ -46,5 +46,6 @@
 - (void)testIncorrectUniqueField;
 
 - (void)testValidMappingModel;
+- (void)testEntityDescriptionWithSuperEntity;
 
 @end

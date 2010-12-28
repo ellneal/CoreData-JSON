@@ -51,6 +51,20 @@
 	return result;
 }
 
+- (NSDictionary *)dictionaryByAddingEntriesFromDictionary:(NSDictionary *)otherDictionary {
+	
+	NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithCapacity:[self count]+[otherDictionary count]];
+	
+	[mutableDictionary addEntriesFromDictionary:self];
+	[mutableDictionary addEntriesFromDictionary:otherDictionary];
+	
+	NSDictionary *result = [NSDictionary dictionaryWithDictionary:mutableDictionary];
+	
+	[mutableDictionary release];
+	
+	return result;
+}
+
 - (id)nilIfNSNullObjectForKey:(id)key {
 	
 	id value = [self objectForKey:key];

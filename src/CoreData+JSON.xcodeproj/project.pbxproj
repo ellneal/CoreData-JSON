@@ -58,6 +58,9 @@
 		4945B55412C39E0F0000EF85 /* NSString+JC.h in Headers */ = {isa = PBXBuildFile; fileRef = 4945B55212C39E0F0000EF85 /* NSString+JC.h */; };
 		4945B55512C39E0F0000EF85 /* NSString+JC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4945B55312C39E0F0000EF85 /* NSString+JC.m */; };
 		4945B5BD12C3CD540000EF85 /* testExpressionEntity.jcmap in Resources */ = {isa = PBXBuildFile; fileRef = 4945B57E12C3C0690000EF85 /* testExpressionEntity.jcmap */; };
+		49A16B5312C942C6009809B6 /* CoreData+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A16B5212C942C6009809B6 /* CoreData+JSON.m */; };
+		49A16B9B12C95C2F009809B6 /* TestSuperEntity.jcmap in Resources */ = {isa = PBXBuildFile; fileRef = 49A16B9A12C95C2F009809B6 /* TestSuperEntity.jcmap */; };
+		49A16B9D12C95CDF009809B6 /* TestSubEntity.jcmap in Resources */ = {isa = PBXBuildFile; fileRef = 49A16B9C12C95CDF009809B6 /* TestSubEntity.jcmap */; };
 		AA747D9F0F9514B9006C5449 /* CoreData_JSON_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* CoreData_JSON_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -139,6 +142,9 @@
 		4945B55212C39E0F0000EF85 /* NSString+JC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+JC.h"; path = "CoreData+JSON/_Convenience/NSString+JC.h"; sourceTree = "<group>"; };
 		4945B55312C39E0F0000EF85 /* NSString+JC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+JC.m"; path = "CoreData+JSON/_Convenience/NSString+JC.m"; sourceTree = "<group>"; };
 		4945B57E12C3C0690000EF85 /* testExpressionEntity.jcmap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = testExpressionEntity.jcmap; sourceTree = "<group>"; };
+		49A16B5212C942C6009809B6 /* CoreData+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CoreData+JSON.m"; path = "CoreData+JSON/CoreData+JSON.m"; sourceTree = "<group>"; };
+		49A16B9A12C95C2F009809B6 /* TestSuperEntity.jcmap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = TestSuperEntity.jcmap; path = LogicTests/_JCMappingModelTestObjects/TestSuperEntity.jcmap; sourceTree = "<group>"; };
+		49A16B9C12C95CDF009809B6 /* TestSubEntity.jcmap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = TestSubEntity.jcmap; path = LogicTests/_JCMappingModelTestObjects/TestSubEntity.jcmap; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* CoreData_JSON_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreData_JSON_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libCoreData_JSON.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCoreData_JSON.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -202,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				4914489E12BE43DC00D29E43 /* CoreData+JSON.h */,
+				49A16B5212C942C6009809B6 /* CoreData+JSON.m */,
 				4914485C12BE3B0B00D29E43 /* Convenience */,
 				4914494812BE660D00D29E43 /* Private */,
 				491447A512BE1DC200D29E43 /* NSManagedObjectContext+JSON.h */,
@@ -296,6 +303,8 @@
 				491446B612BD911800D29E43 /* TestBlankPropertiesMap.jcmap */,
 				491446E812BD961E00D29E43 /* TestIncorrectUniqueField.jcmap */,
 				491446BC12BD928400D29E43 /* TestValidMappingModel.jcmap */,
+				49A16B9A12C95C2F009809B6 /* TestSuperEntity.jcmap */,
+				49A16B9C12C95CDF009809B6 /* TestSubEntity.jcmap */,
 			);
 			name = "JCMappingModel Test Objects";
 			sourceTree = "<group>";
@@ -435,6 +444,8 @@
 				4914492B12BE625600D29E43 /* testRelatedEntity.jcmap in Resources */,
 				49450EED12BF011A00F0CE0F /* testTransformedUniqueFieldEntity.jcmap in Resources */,
 				4945B5BD12C3CD540000EF85 /* testExpressionEntity.jcmap in Resources */,
+				49A16B9B12C95C2F009809B6 /* TestSuperEntity.jcmap in Resources */,
+				49A16B9D12C95CDF009809B6 /* TestSubEntity.jcmap in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,6 +511,7 @@
 				49450E2D12BEEE8800F0CE0F /* NSValueTransformer+JC.m in Sources */,
 				49450E6912BEF48D00F0CE0F /* TestToDateValueTransformer.m in Sources */,
 				4945B55512C39E0F0000EF85 /* NSString+JC.m in Sources */,
+				49A16B5312C942C6009809B6 /* CoreData+JSON.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

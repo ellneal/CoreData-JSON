@@ -32,6 +32,7 @@
 #import "JCMappingModel.h"
 #import "JCMappingModelCache.h"
 #import "FauxEntityDescription.h"
+#import "CoreData+JSON.h"
 
 @implementation JCMappingModelCacheTests
 
@@ -59,7 +60,7 @@
 
 - (void)testClearingCache {
 	
-	[[JCMappingModelCache defaultCache] clearCache];
+	JCClearMapCache();
 	
 	STAssertNil([[JCMappingModelCache defaultCache] mappingModelForEntity:entity], @"Mapping model cache should clear all mapping models after using clearCache");
 }

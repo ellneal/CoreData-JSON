@@ -34,12 +34,15 @@
 @interface FauxEntityDescription : NSObject {
 
 	NSString *name_;
+	FauxEntityDescription *superEntity_;
 }
 
 - (NSString *)name;
 - (NSDictionary *)propertiesByName;
 
 - (id)initWithName:(NSString *)name;
+- (id)initWithName:(NSString *)name superEntity:(NSEntityDescription *)superEntity;
 + (NSEntityDescription *)entityDescriptionWithName:(NSString *)name;
++ (NSEntityDescription *)entityDescriptionWithName:(NSString *)name superEntity:(NSEntityDescription *)superEntity;
 
 @end

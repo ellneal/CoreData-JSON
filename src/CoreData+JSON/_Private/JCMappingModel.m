@@ -79,9 +79,18 @@
 		
 		NSDictionary *propertiesMap = [map objectForKey:kPropertiesMapKey];
 		[self checkPropertiesMapIsNotNil:propertiesMap];
-		propertiesMap_ = [propertiesMap retain];
 		
 		NSDictionary *valueTransformers = [map objectForKey:kValueTransformersMapKey];
+		
+		if ([entity superentity] != nil) {
+			
+			JCMappingModel *superMap = [JCMappingModel mappingModelWithEntity:[entity superentity] bundle:bundleOrNil];
+			
+			propertiesMap = [propertiesMap dictionaryByAddingEntriesFromDictionary:superMap.propertiesMap];
+			valueTransformers = [propertiesMap dictionaryByAddingEntriesFromDictionary:superMap.valueTransformers];
+		}
+		
+		propertiesMap_ = [propertiesMap retain];
 		valueTransformers_ = [valueTransformers retain];
 	}
 	

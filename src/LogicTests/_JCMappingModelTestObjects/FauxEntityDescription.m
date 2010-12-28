@@ -35,8 +35,14 @@
 
 - (id)initWithName:(NSString *)name {
 	
+	return [self initWithName:name superEntity:nil];
+}
+
+- (id)initWithName:(NSString *)name superEntity:(NSEntityDescription *)superEntity {
+	
 	if (self = [super init]) {
 		name_ = [name copy];
+		superEntity_ = [superEntity retain];
 	}
 	
 	return self;
@@ -44,17 +50,27 @@
 
 - (NSDictionary *)propertiesByName {
 	
-	return [NSDictionary dictionaryWithObjectsAndKeys:[NSNull null], @"someField", [NSNull null], @"someCoreDataKey", nil];
+	return [NSDictionary dictionaryWithObjectsAndKeys:[NSNull null], @"someField", [NSNull null], @"someCoreDataKey", [NSNull null], @"testID", nil];
 }
 
 + (NSEntityDescription *)entityDescriptionWithName:(NSString *)name {
 	
-	return (NSEntityDescription *)[[[FauxEntityDescription alloc] initWithName:name] autorelease];
+	return [self entityDescriptionWithName:name superEntity:nil];
+}
+
++ (NSEntityDescription *)entityDescriptionWithName:(NSString *)name superEntity:(NSEntityDescription *)superEntity {
+	
+	return (NSEntityDescription *)[[[FauxEntityDescription alloc] initWithName:name superEntity:superEntity] autorelease];
 }
 
 - (NSString *)name {
 	
 	return name_;
+}
+
+- (NSEntityDescription *)superentity {
+	
+	return (NSEntityDescription *)superEntity_;
 }
 
 @end
