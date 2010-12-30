@@ -142,7 +142,7 @@
 		4945B55212C39E0F0000EF85 /* NSString+JC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+JC.h"; path = "CoreData+JSON/_Convenience/NSString+JC.h"; sourceTree = "<group>"; };
 		4945B55312C39E0F0000EF85 /* NSString+JC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+JC.m"; path = "CoreData+JSON/_Convenience/NSString+JC.m"; sourceTree = "<group>"; };
 		4945B57E12C3C0690000EF85 /* testExpressionEntity.jcmap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = testExpressionEntity.jcmap; sourceTree = "<group>"; };
-		49A16B5212C942C6009809B6 /* CoreData+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CoreData+JSON.m"; path = "CoreData+JSON/CoreData+JSON.m"; sourceTree = "<group>"; };
+		49A16B5212C942C6009809B6 /* CoreData+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CoreData+JSON.m"; path = "CoreData+JSON/_Private/CoreData+JSON.m"; sourceTree = "<group>"; };
 		49A16B9A12C95C2F009809B6 /* TestSuperEntity.jcmap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = TestSuperEntity.jcmap; path = LogicTests/_JCMappingModelTestObjects/TestSuperEntity.jcmap; sourceTree = "<group>"; };
 		49A16B9C12C95CDF009809B6 /* TestSubEntity.jcmap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = TestSubEntity.jcmap; path = LogicTests/_JCMappingModelTestObjects/TestSubEntity.jcmap; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* CoreData_JSON_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreData_JSON_Prefix.pch; sourceTree = SOURCE_ROOT; };
@@ -208,7 +208,6 @@
 			isa = PBXGroup;
 			children = (
 				4914489E12BE43DC00D29E43 /* CoreData+JSON.h */,
-				49A16B5212C942C6009809B6 /* CoreData+JSON.m */,
 				4914485C12BE3B0B00D29E43 /* Convenience */,
 				4914494812BE660D00D29E43 /* Private */,
 				491447A512BE1DC200D29E43 /* NSManagedObjectContext+JSON.h */,
@@ -330,6 +329,7 @@
 		4914494812BE660D00D29E43 /* Private */ = {
 			isa = PBXGroup;
 			children = (
+				49A16B5212C942C6009809B6 /* CoreData+JSON.m */,
 				4914494912BE664C00D29E43 /* CoreData+JSON_Private.h */,
 				491444B412BD44B700D29E43 /* JCMappingModel.h */,
 				491444B512BD44B700D29E43 /* JCMappingModel.m */,

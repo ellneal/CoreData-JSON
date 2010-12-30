@@ -35,9 +35,6 @@
 
 @interface NSManagedObject (JSONPrivate)
 
-+ (id)managedObjectWithJSON:(NSString *)json entity:(NSEntityDescription *)entity managedObjectContext:(NSManagedObjectContext *)managedObjectContext bundle:(NSBundle *)bundleOrNil;
-+ (id)managedObjectWithDictionary:(NSDictionary *)values entity:(NSEntityDescription *)entity managedObjectContext:(NSManagedObjectContext *)managedObjectContext bundle:(NSBundle *)bundleOrNil;
-
 - (void)setAttributesFromDictionary:(NSDictionary *)dictionary mappingModel:(JCMappingModel *)mappingModel;
 - (void)setRelationshipsFromDictionary:(NSDictionary *)dictionary mappingModel:(JCMappingModel *)mappingModel bundle:(NSBundle *)bundleOrNil;
 

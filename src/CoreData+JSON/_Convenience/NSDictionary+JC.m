@@ -53,6 +53,9 @@
 
 - (NSDictionary *)dictionaryByAddingEntriesFromDictionary:(NSDictionary *)otherDictionary {
 	
+	if (otherDictionary == nil)
+		return self;
+	
 	NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithCapacity:[self count]+[otherDictionary count]];
 	
 	[mutableDictionary addEntriesFromDictionary:self];

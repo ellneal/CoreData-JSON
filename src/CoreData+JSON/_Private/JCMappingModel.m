@@ -72,7 +72,15 @@
 		
 		NSDictionary *map = [NSDictionary dictionaryWithContentsOfFile:filePath];
 		
+		NSEntityDescription *superentity = [entity superentity];
+		JCMappingModel *superMap = nil;
+		
+		if (superentity != nil)
+			superMap = [JCMappingModel mappingModelWithEntity:superentity bundle:bundleOrNil];
+		
 		NSString *uniqueField = [map objectForKey:kUniqueFieldMapKey];
+		if (uniqueField == nil && superMap != nil)
+			uniqueField = [superMap uniqueField];
 		[self checkUniqueFieldIsNotNil:uniqueField];
 		[self checkEntity:entity hasFieldNamed:uniqueField];
 		uniqueField_ = [uniqueField copy];
@@ -82,10 +90,7 @@
 		
 		NSDictionary *valueTransformers = [map objectForKey:kValueTransformersMapKey];
 		
-		if ([entity superentity] != nil) {
-			
-			JCMappingModel *superMap = [JCMappingModel mappingModelWithEntity:[entity superentity] bundle:bundleOrNil];
-			
+		if (superMap != nil) {
 			propertiesMap = [propertiesMap dictionaryByAddingEntriesFromDictionary:superMap.propertiesMap];
 			valueTransformers = [propertiesMap dictionaryByAddingEntriesFromDictionary:superMap.valueTransformers];
 		}

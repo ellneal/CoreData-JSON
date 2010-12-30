@@ -100,6 +100,8 @@
 	
 	STAssertNoThrow((model = [JCMappingModel mappingModelWithEntity:entity bundle:bundle]), @"Creating JCMappingModel with valid mapping file should not throw Exception.");
 	STAssertNotNil(model, @"JCMappingModel should not be nil after creation with valid mapping model.");
+	STAssertNotNil(model.propertiesMap, nil);
+	STAssertNotNil(model.uniqueField, nil);
 }
 
 - (void)testEntityDescriptionWithSuperEntity {

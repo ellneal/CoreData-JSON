@@ -31,6 +31,5 @@
 #import "NSManagedObject+JSON.h"
 #import "NSManagedObjectContext+JSON.h"
 
-//#define JCClearMapCache() [[JCMappingModelCache defaultCache] clearCache];
 void JCClearMapCache(void);
 

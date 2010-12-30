@@ -40,7 +40,7 @@
 
 - (JCMappingModel *)mappingModelForEntity:(NSEntityDescription *)entity {
 	
-	return [[self cache] objectForKey:[entity name]];
+	return [[[[self cache] objectForKey:[entity name]] retain] autorelease];
 }
 - (void)setMappingModel:(JCMappingModel *)mappingModel forEntity:(NSEntityDescription *)entity {
 	
