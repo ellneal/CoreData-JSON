@@ -114,7 +114,7 @@
 	}
 }
 
-- (void)setValue:(id)value forRelationship:(NSString *)relationship bundle:bundleOrNil {
+- (void)setValue:(id)value forRelationship:(NSString *)relationship bundle:(NSBundle *)bundleOrNil {
 	
 	id newValue = value;
 	
@@ -132,7 +132,7 @@
 			
 			for (id subValue in value) {
 				
-				NSManagedObject *newManagedObject = [self managedObjectWithDictionaryOrUniqueFieldValue:subValue forEntity:destinationEntity bundle:nil];
+				NSManagedObject *newManagedObject = [self managedObjectWithDictionaryOrUniqueFieldValue:subValue forEntity:destinationEntity bundle:bundleOrNil];
 				
 				[relationshipValues addObject:newManagedObject];
 			}
