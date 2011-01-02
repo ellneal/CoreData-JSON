@@ -158,7 +158,7 @@
 	
 	if ([value isKindOfClass:[NSDictionary class]]) {
 		
-		managedObject = [NSManagedObject managedObjectWithDictionary:value entity:entity managedObjectContext:managedObjectContext];
+		managedObject = [NSManagedObject managedObjectWithDictionary:value entity:entity managedObjectContext:managedObjectContext bundle:bundleOrNil];
 	}
 	else if ([value isKindOfClass:[NSNumber class]] || [value isKindOfClass:[NSString class]]) {
 		
