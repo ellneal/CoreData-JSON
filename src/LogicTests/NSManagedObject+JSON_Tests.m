@@ -243,9 +243,9 @@
 	
 	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"someUniqueValue", @"jsonUniqueField", [NSNumber numberWithInteger:45], @"jsonTestNumber", nil];
 	
-	NSManagedObject *managedObject = [NSManagedObject managedObjectWithDictionary:dictionary entity:entity managedObjectContext:managedObjectContext bundle:bundle];
+	NSManagedObject *managedObject = [NSManagedObject managedObjectWithDictionary:dictionary entity:entity managedObjectContext:managedObjectContext superUniqueFieldValue:[NSNumber numberWithInteger:432] bundle:bundle];
 	
-	STAssertTrue([[managedObject valueForKey:@"uniqueField"] isEqualToString:@"someUniqueValue_45"], nil);
+	STAssertTrue([[managedObject valueForKey:@"uniqueField"] isEqualToString:@"someUniqueValue_45_432"], nil);
 }
 
 @end

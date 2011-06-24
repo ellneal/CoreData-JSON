@@ -50,7 +50,10 @@
 + (JCMappingModel *)mappingModelWithEntity:(NSEntityDescription *)entity bundle:(NSBundle *)bundleOrNil;
 
 - (id)transformedValue:(id)value forPropertyName:(NSString *)propertyName;
-- (id)valueForMappedKey:(NSString *)mappedKey fromDictionary:(NSDictionary *)dictionary;
+- (id)reverseTransformedValue:(id)value forPropertyName:(NSString *)propertyName;
+- (id)valueForMappedPropertyName:(NSString *)mappedPropertyName fromDictionary:(NSDictionary *)dictionary;
+- (id)valueForMappedPropertyName:(NSString *)mappedPropertyName fromDictionary:(NSDictionary *)dictionary withSuperUniqueFieldValue:(id)superUniqueFieldValue;
+- (id)valueForPropertyName:(NSString *)propertyName fromManagedObject:(NSManagedObject *)managedObject;
 
 @property (nonatomic, readonly) NSEntityDescription *entity;
 @property (nonatomic, readonly) NSDictionary *propertiesMap;

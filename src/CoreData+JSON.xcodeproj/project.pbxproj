@@ -122,8 +122,8 @@
 		491448E012BE5FAB00D29E43 /* NSManagedObjectContext+UnitTesting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObjectContext+UnitTesting.m"; path = "LogicTests/_OtherTestObjects/NSManagedObjectContext+UnitTesting.m"; sourceTree = "<group>"; };
 		4914491512BE613C00D29E43 /* NSManagedObject+JSON_Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObject+JSON_Tests.h"; path = "LogicTests/NSManagedObject+JSON_Tests.h"; sourceTree = "<group>"; };
 		4914491612BE613C00D29E43 /* NSManagedObject+JSON_Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObject+JSON_Tests.m"; path = "LogicTests/NSManagedObject+JSON_Tests.m"; sourceTree = "<group>"; };
-		4914492812BE624500D29E43 /* testEntity.jcmap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = testEntity.jcmap; path = LogicTests/_OtherTestObjects/testEntity.jcmap; sourceTree = "<group>"; };
-		4914492A12BE625600D29E43 /* testRelatedEntity.jcmap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = testRelatedEntity.jcmap; path = LogicTests/_OtherTestObjects/testRelatedEntity.jcmap; sourceTree = "<group>"; };
+		4914492812BE624500D29E43 /* testEntity.jcmap */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; name = testEntity.jcmap; path = LogicTests/_OtherTestObjects/testEntity.jcmap; sourceTree = "<group>"; };
+		4914492A12BE625600D29E43 /* testRelatedEntity.jcmap */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; name = testRelatedEntity.jcmap; path = LogicTests/_OtherTestObjects/testRelatedEntity.jcmap; sourceTree = "<group>"; };
 		4914494912BE664C00D29E43 /* CoreData+JSON_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CoreData+JSON_Private.h"; path = "CoreData+JSON/_Private/CoreData+JSON_Private.h"; sourceTree = "<group>"; };
 		4914495D12BE693E00D29E43 /* NSManagedObjectContext+JSON_Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObjectContext+JSON_Tests.h"; path = "LogicTests/NSManagedObjectContext+JSON_Tests.h"; sourceTree = "<group>"; };
 		4914495E12BE693E00D29E43 /* NSManagedObjectContext+JSON_Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObjectContext+JSON_Tests.m"; path = "LogicTests/NSManagedObjectContext+JSON_Tests.m"; sourceTree = "<group>"; };
@@ -135,13 +135,13 @@
 		49450E2B12BEEE8800F0CE0F /* NSValueTransformer+JC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSValueTransformer+JC.m"; path = "CoreData+JSON/_Convenience/NSValueTransformer+JC.m"; sourceTree = "<group>"; };
 		49450E6612BEF48D00F0CE0F /* TestToDateValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestToDateValueTransformer.h; path = LogicTests/_OtherTestObjects/TestToDateValueTransformer.h; sourceTree = "<group>"; };
 		49450E6712BEF48D00F0CE0F /* TestToDateValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestToDateValueTransformer.m; path = LogicTests/_OtherTestObjects/TestToDateValueTransformer.m; sourceTree = "<group>"; };
-		49450EEC12BF011A00F0CE0F /* testTransformedUniqueFieldEntity.jcmap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = testTransformedUniqueFieldEntity.jcmap; path = LogicTests/_OtherTestObjects/testTransformedUniqueFieldEntity.jcmap; sourceTree = "<group>"; };
+		49450EEC12BF011A00F0CE0F /* testTransformedUniqueFieldEntity.jcmap */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; name = testTransformedUniqueFieldEntity.jcmap; path = LogicTests/_OtherTestObjects/testTransformedUniqueFieldEntity.jcmap; sourceTree = "<group>"; };
 		49450EF012BF01B000F0CE0F /* TestNumberToStringTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestNumberToStringTransformer.h; path = LogicTests/_OtherTestObjects/TestNumberToStringTransformer.h; sourceTree = "<group>"; };
 		49450EF112BF01B000F0CE0F /* TestNumberToStringTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestNumberToStringTransformer.m; path = LogicTests/_OtherTestObjects/TestNumberToStringTransformer.m; sourceTree = "<group>"; };
 		49450F4012BFC39A00F0CE0F /* UnitTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "UnitTests-Info.plist"; sourceTree = "<group>"; };
 		4945B55212C39E0F0000EF85 /* NSString+JC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+JC.h"; path = "CoreData+JSON/_Convenience/NSString+JC.h"; sourceTree = "<group>"; };
 		4945B55312C39E0F0000EF85 /* NSString+JC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+JC.m"; path = "CoreData+JSON/_Convenience/NSString+JC.m"; sourceTree = "<group>"; };
-		4945B57E12C3C0690000EF85 /* testExpressionEntity.jcmap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = testExpressionEntity.jcmap; sourceTree = "<group>"; };
+		4945B57E12C3C0690000EF85 /* testExpressionEntity.jcmap */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = testExpressionEntity.jcmap; sourceTree = "<group>"; };
 		49A16B5212C942C6009809B6 /* CoreData+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CoreData+JSON.m"; path = "CoreData+JSON/_Private/CoreData+JSON.m"; sourceTree = "<group>"; };
 		49A16B9A12C95C2F009809B6 /* TestSuperEntity.jcmap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = TestSuperEntity.jcmap; path = LogicTests/_JCMappingModelTestObjects/TestSuperEntity.jcmap; sourceTree = "<group>"; };
 		49A16B9C12C95CDF009809B6 /* TestSubEntity.jcmap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = TestSubEntity.jcmap; path = LogicTests/_JCMappingModelTestObjects/TestSubEntity.jcmap; sourceTree = "<group>"; };
@@ -539,6 +539,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CoreData_JSON_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INSTALL_PATH = /usr/local/lib;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = CoreData_JSON;
@@ -554,6 +555,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CoreData_JSON_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = CoreData_JSON;
 			};
@@ -600,6 +602,7 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "UnitTests-Info.plist";
 				OTHER_LDFLAGS = (
 					"-all_load",
@@ -631,6 +634,7 @@
 				);
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "UnitTests-Info.plist";
 				OTHER_LDFLAGS = (
 					"-framework",

@@ -68,9 +68,35 @@
 	return result;
 }
 
+- (NSDictionary *)dictionaryByRemovingObjectsForKeys:(NSArray *)keyArray {
+	
+	if (keyArray == nil)
+		return self;
+	
+	NSMutableDictionary *mutableDictionary = [self mutableCopy];
+	
+	[mutableDictionary removeObjectsForKeys:keyArray];
+	
+	NSDictionary *result = [NSDictionary dictionaryWithDictionary:mutableDictionary];
+	
+	[mutableDictionary release];
+	
+	return result;
+}
+
 - (id)nilIfNSNullObjectForKey:(id)key {
 	
 	id value = [self objectForKey:key];
+	
+	if (value == [NSNull null])
+		return nil;
+	
+	return value;
+}
+
+- (id)nilIfNSNullObjectForKeyPath:(NSString *)keyPath {
+	
+	id value = [self valueForKeyPath:keyPath];
 	
 	if (value == [NSNull null])
 		return nil;

@@ -33,7 +33,7 @@
 
 @interface NSString (JC)
 
-+ (id)stringWithFormat:(NSString *)format array:(NSArray*) arguments;
++ (id)stringWithFormat:(NSString *)format array:(NSArray*)arguments;
 + (BOOL)stringIsNilOrEmpty:(NSString *)string;
 
 - (NSString *)stringByRemovingCharactersInSet:(NSCharacterSet *)characterSet;

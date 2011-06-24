@@ -34,8 +34,8 @@
 	<key>PropertiesMap</key>
 	<dict>
 		<key>uniqueField</key>
-		<string>{@&quot;%@_%@&quot;	,	jsonUniqueField,
-		jsonTestNumber}  </string>
+		<string>{@&quot;%@_%@_%@&quot;	,	jsonUniqueField,
+		jsonTestNumber, superUniqueFieldValue	}  </string>
 	</dict>
 </dict>
 </plist>

@@ -40,8 +40,8 @@
 - (void)checkEntity:(NSEntityDescription *)entity hasFieldNamed:(NSString *)field;
 - (void)checkPropertiesMapIsNotNil:(NSDictionary *)propertiesMap;
 
-- (BOOL)valueIsExpression:(id)value;
-- (id)valueForExpression:(NSString *)expression fromDictionary:(NSDictionary *)dictionary;
+- (BOOL)mappedKeyIsExpression:(id)value;
+- (id)valueForExpression:(NSString *)expression fromDictionary:(NSDictionary *)dictionary withSuperUniqueFieldValue:(id)superUniqueFieldValue;
 
 @end
 
@@ -59,7 +59,7 @@
 
 - (id)initWithEntity:(NSEntityDescription *)entity bundle:(NSBundle *)bundleOrNil {
 	
-	if (self = [super init]) {
+	if ((self = [super init])) {
 		
 		NSBundle *bundle = (bundleOrNil != nil ? bundleOrNil : [NSBundle mainBundle]);
 		
@@ -164,19 +164,60 @@
 	return transformedValue;
 }
 
-- (id)valueForMappedKey:(NSString *)mappedKey fromDictionary:(NSDictionary *)dictionary {
+- (id)reverseTransformedValue:(id)value forPropertyName:(NSString *)propertyName {
+	
+	if (value == [NSNull null])
+		return value;
+	
+	NSString *valueTransformerName = [self.valueTransformers objectForKey:propertyName];
+	
+	if (valueTransformerName == nil)
+		return value;
+	
+	NSValueTransformer *valueTransformer = [NSValueTransformer valueTransformerInstanceWithClassName:valueTransformerName];
+	
+	if (![[valueTransformer class] allowsReverseTransformation])
+		return value;
+	
+	id reverseTransformedValue = [valueTransformer reverseTransformedValue:value];
+	
+	return reverseTransformedValue;
+}
+
+- (id)valueForMappedPropertyName:(NSString *)mappedPropertyName fromDictionary:(NSDictionary *)dictionary {
+	
+	return [self valueForMappedPropertyName:mappedPropertyName fromDictionary:dictionary withSuperUniqueFieldValue:nil];
+}
+
+- (id)valueForMappedPropertyName:(NSString *)mappedPropertyName fromDictionary:(NSDictionary *)dictionary withSuperUniqueFieldValue:(id)superUniqueFieldValue {
 	
 	id value = nil;
 	
-	if ([self valueIsExpression:mappedKey])
-		value = [self valueForExpression:[mappedKey stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] fromDictionary:dictionary];
+	if ([self mappedKeyIsExpression:mappedPropertyName])
+		value = [self valueForExpression:[mappedPropertyName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] fromDictionary:dictionary withSuperUniqueFieldValue:superUniqueFieldValue];
 	else
-		value = [dictionary nilIfNSNullObjectForKey:mappedKey];
+		value = [dictionary nilIfNSNullObjectForKeyPath:mappedPropertyName];
 	
 	return value;
 }
 
-- (BOOL)valueIsExpression:(id)value {
+- (id)valueForPropertyName:(NSString *)propertyName fromManagedObject:(NSManagedObject *)managedObject {
+	
+	NSString *mappedKey = [self.propertiesMap objectForKey:propertyName];
+	id value = nil;
+	
+	if (![self mappedKeyIsExpression:mappedKey]) {
+		
+		value = [managedObject valueForKey:propertyName];
+		
+		if (value == nil)
+			value = [NSNull null];
+	}
+	
+	return value;
+}
+
+- (BOOL)mappedKeyIsExpression:(id)value {
 	
 	if ([value isKindOfClass:[NSString class]]) {
 		
@@ -191,7 +232,7 @@
 	return NO;
 }
 
-- (id)valueForExpression:(NSString *)expression fromDictionary:(NSDictionary *)dictionary {
+- (id)valueForExpression:(NSString *)expression fromDictionary:(NSDictionary *)dictionary withSuperUniqueFieldValue:(id)superUniqueFieldValue {
 	
 	//remove curly braces
 	NSString *cleanedExpression = [expression substringWithRange:NSMakeRange(1, [expression length] - 2)];
@@ -214,8 +255,12 @@
 	
 	NSMutableArray *argumentValues = [[NSMutableArray alloc] initWithCapacity:[arguments count]];
 	
-	for (NSString *mappedKey in arguments)
-		[argumentValues addObject:[self valueForMappedKey:mappedKey fromDictionary:dictionary]];
+	for (NSString *mappedKey in arguments) {
+		if ([mappedKey isEqualToString:@"superUniqueFieldValue"])
+			[argumentValues addObject:superUniqueFieldValue];
+		else
+			[argumentValues addObject:[self valueForMappedPropertyName:mappedKey fromDictionary:dictionary]];
+	}
 	
 	NSString *result = [NSString stringWithFormat:formatString array:argumentValues];
 	

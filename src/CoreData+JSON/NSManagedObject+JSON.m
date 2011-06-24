@@ -35,14 +35,17 @@
 
 @interface NSManagedObject (JSONPrivate)
 
-- (void)setAttributesFromDictionary:(NSDictionary *)dictionary mappingModel:(JCMappingModel *)mappingModel;
-- (void)setRelationshipsFromDictionary:(NSDictionary *)dictionary mappingModel:(JCMappingModel *)mappingModel bundle:(NSBundle *)bundleOrNil;
+- (void)setAttributesFromDictionary:(NSDictionary *)dictionary mappingModel:(JCMappingModel *)mappingModel superUniqueFieldValue:(id)superUniqueFieldValue;
+- (void)setRelationshipsFromDictionary:(NSDictionary *)dictionary mappingModel:(JCMappingModel *)mappingModel uniqueFieldValue:(id)uniqueFieldValue bundle:(NSBundle *)bundleOrNil;
 
-- (void)setValue:(id)value forRelationship:(NSString *)relationship bundle:(NSBundle *)bundleOrNil;
-- (id)managedObjectWithDictionaryOrUniqueFieldValue:(id)value forEntity:(NSEntityDescription *)entity bundle:(NSBundle *)bundleOrNil;
+- (void)setValue:(id)value forRelationship:(NSString *)relationship uniqueFieldValue:(id)superUniqueFieldValue bundle:(NSBundle *)bundleOrNil;
+- (id)managedObjectWithDictionaryOrUniqueFieldValue:(id)value forEntity:(NSEntityDescription *)entity superUniqueFieldValue:(id)superUniqueFieldValue bundle:(NSBundle *)bundleOrNil;
 
 - (NSString *)JSONRepresentationWithBundle:(NSBundle *)bundleOrNil;
 - (NSString *)JSONRepresentationWithToManyBehaviour:(JSONRelationshipMappingBehaviour)toManyBehaviour toOneBehaviour:(JSONRelationshipMappingBehaviour)toOneBehaviour bundle:(NSBundle *)bundleOrNil;
+
+- (NSDictionary *)dictionaryRepresentationWithToManyBehaviour:(JSONRelationshipMappingBehaviour)toManyBehaviour toOneBehaviour:(JSONRelationshipMappingBehaviour)toOneBehaviour bundle:(NSBundle *)bundleOrNil;
+- (NSDictionary *)dictionaryRepresentationWithToManyBehaviour:(JSONRelationshipMappingBehaviour)toManyBehaviour toOneBehaviour:(JSONRelationshipMappingBehaviour)toOneBehaviour bundle:(NSBundle *)bundleOrNil excludingRelationship:(NSRelationshipDescription *)excludingRelationship;
 
 @end
 
@@ -50,40 +53,55 @@
 
 + (id)managedObjectWithJSON:(NSString *)json entity:(NSEntityDescription *)entity managedObjectContext:(NSManagedObjectContext *)managedObjectContext {
 	
-	return [self managedObjectWithJSON:json entity:entity managedObjectContext:managedObjectContext bundle:nil];
+	return [self managedObjectWithJSON:json entity:entity managedObjectContext:managedObjectContext superUniqueFieldValue:nil];
 }
 
-+ (id)managedObjectWithJSON:(NSString *)json entity:(NSEntityDescription *)entity managedObjectContext:(NSManagedObjectContext *)managedObjectContext bundle:(NSBundle *)bundleOrNil {
++ (id)managedObjectWithDictionary:(NSDictionary *)values entity:(NSEntityDescription *)entity managedObjectContext:(NSManagedObjectContext *)managedObjectContext bundle:(NSBundle *)bundleOrNil {
+	
+	return [self managedObjectWithDictionary:values entity:entity managedObjectContext:managedObjectContext superUniqueFieldValue:nil bundle:bundleOrNil];
+}
+
++ (id)managedObjectWithJSON:(NSString *)json entity:(NSEntityDescription *)entity managedObjectContext:(NSManagedObjectContext *)managedObjectContext superUniqueFieldValue:(id)superUniqueFieldValue {
+	
+	return [self managedObjectWithJSON:json entity:entity managedObjectContext:managedObjectContext superUniqueFieldValue:superUniqueFieldValue bundle:nil];
+}
+
++ (id)managedObjectWithJSON:(NSString *)json entity:(NSEntityDescription *)entity managedObjectContext:(NSManagedObjectContext *)managedObjectContext superUniqueFieldValue:(id)superUniqueFieldValue bundle:(NSBundle *)bundleOrNil {
 	
 	NSDictionary *jsonValues = [json JSONValue];
 	
-	return [self managedObjectWithDictionary:jsonValues entity:entity managedObjectContext:managedObjectContext bundle:bundleOrNil];
+	return [self managedObjectWithDictionary:jsonValues entity:entity managedObjectContext:managedObjectContext superUniqueFieldValue:superUniqueFieldValue bundle:bundleOrNil];
 }
 
 + (id)managedObjectWithDictionary:(NSDictionary *)values entity:(NSEntityDescription *)entity managedObjectContext:(NSManagedObjectContext *)managedObjectContext {
 	
-	return [self managedObjectWithDictionary:values entity:entity managedObjectContext:managedObjectContext bundle:nil];
+	return [self managedObjectWithDictionary:values entity:entity managedObjectContext:managedObjectContext superUniqueFieldValue:nil];
 }
 
-+ (id)managedObjectWithDictionary:(NSDictionary *)values entity:(NSEntityDescription *)entity managedObjectContext:(NSManagedObjectContext *)managedObjectContext bundle:(NSBundle *)bundleOrNil {
++ (id)managedObjectWithDictionary:(NSDictionary *)values entity:(NSEntityDescription *)entity managedObjectContext:(NSManagedObjectContext *)managedObjectContext superUniqueFieldValue:(id)superUniqueFieldValue {
+	
+	return [self managedObjectWithDictionary:values entity:entity managedObjectContext:managedObjectContext superUniqueFieldValue:superUniqueFieldValue bundle:nil];
+}
+
++ (id)managedObjectWithDictionary:(NSDictionary *)values entity:(NSEntityDescription *)entity managedObjectContext:(NSManagedObjectContext *)managedObjectContext superUniqueFieldValue:(id)superUniqueFieldValue bundle:(NSBundle *)bundleOrNil {
 	
 	JCMappingModel *mappingModel = [JCMappingModel mappingModelWithEntity:entity bundle:bundleOrNil];
 	NSString *coreDataUniqueFieldName = mappingModel.uniqueField;
 	NSDictionary *propertiesMap = mappingModel.propertiesMap;
 	NSString *mappedUniqueFieldName = [propertiesMap objectForKey:coreDataUniqueFieldName];
-	id uniqueFieldValue = [mappingModel valueForMappedKey:mappedUniqueFieldName fromDictionary:values];
+	id uniqueFieldValue = [mappingModel valueForMappedPropertyName:mappedUniqueFieldName fromDictionary:values withSuperUniqueFieldValue:superUniqueFieldValue];
 	id transformedUniqueFieldValue = [mappingModel transformedValue:uniqueFieldValue forPropertyName:coreDataUniqueFieldName];
 	
 	id managedObject = [managedObjectContext fetchOrInsertManagedObjectForEntity:entity withAttribute:coreDataUniqueFieldName equalTo:transformedUniqueFieldValue];
 	
-	[managedObject setAttributesFromDictionary:values mappingModel:mappingModel];
-	[managedObject setRelationshipsFromDictionary:values mappingModel:mappingModel bundle:bundleOrNil];
+	[managedObject setAttributesFromDictionary:values mappingModel:mappingModel superUniqueFieldValue:superUniqueFieldValue];
+	[managedObject setRelationshipsFromDictionary:values mappingModel:mappingModel uniqueFieldValue:transformedUniqueFieldValue bundle:bundleOrNil];
 	
 	return managedObject;
 }
 
 
-- (void)setAttributesFromDictionary:(NSDictionary *)dictionary mappingModel:(JCMappingModel *)mappingModel {
+- (void)setAttributesFromDictionary:(NSDictionary *)dictionary mappingModel:(JCMappingModel *)mappingModel superUniqueFieldValue:(id)superUniqueFieldValue {
 	
 	NSDictionary *attributes = [[self entity] attributesByNameIncludedInMappingModel:mappingModel];
 	NSArray *coreDataAttributes = [attributes allKeys];
@@ -92,14 +110,14 @@
 		
 		NSString *mappedKey = [mappingModel.propertiesMap objectForKey:attribute];
 		
-		id newValue = [mappingModel valueForMappedKey:mappedKey fromDictionary:dictionary];
+		id newValue = [mappingModel valueForMappedPropertyName:mappedKey fromDictionary:dictionary withSuperUniqueFieldValue:superUniqueFieldValue];
 		newValue = [mappingModel transformedValue:newValue forPropertyName:attribute];
 		
 		[self setValue:newValue forKey:attribute];
 	}
 }
 
-- (void)setRelationshipsFromDictionary:(NSDictionary *)dictionary mappingModel:(JCMappingModel *)mappingModel bundle:(NSBundle *)bundleOrNil {
+- (void)setRelationshipsFromDictionary:(NSDictionary *)dictionary mappingModel:(JCMappingModel *)mappingModel uniqueFieldValue:(id)uniqueFieldValue bundle:(NSBundle *)bundleOrNil {
 	
 	NSDictionary *relationships = [[self entity] relationshipsByNameIncludedInMappingModel:mappingModel];
 	NSArray *coreDataRelationships = [relationships allKeys];
@@ -108,13 +126,13 @@
 		
 		NSString *mappedKey = [mappingModel.propertiesMap objectForKey:relationship];
 		
-		id newValue = [mappingModel valueForMappedKey:mappedKey fromDictionary:dictionary];
+		id newValue = [mappingModel valueForMappedPropertyName:mappedKey fromDictionary:dictionary];
 		newValue = [mappingModel transformedValue:newValue forPropertyName:relationship];
-		[self setValue:newValue forRelationship:relationship bundle:bundleOrNil];
+		[self setValue:newValue forRelationship:relationship uniqueFieldValue:uniqueFieldValue bundle:bundleOrNil];
 	}
 }
 
-- (void)setValue:(id)value forRelationship:(NSString *)relationship bundle:(NSBundle *)bundleOrNil {
+- (void)setValue:(id)value forRelationship:(NSString *)relationship uniqueFieldValue:(id)uniqueFieldValue bundle:(NSBundle *)bundleOrNil {
 	
 	id newValue = value;
 	
@@ -132,7 +150,7 @@
 			
 			for (id subValue in value) {
 				
-				NSManagedObject *newManagedObject = [self managedObjectWithDictionaryOrUniqueFieldValue:subValue forEntity:destinationEntity bundle:bundleOrNil];
+				NSManagedObject *newManagedObject = [self managedObjectWithDictionaryOrUniqueFieldValue:subValue forEntity:destinationEntity superUniqueFieldValue:uniqueFieldValue bundle:bundleOrNil];
 				
 				[relationshipValues addObject:newManagedObject];
 			}
@@ -142,7 +160,7 @@
 		}
 		else {
 			
-			NSManagedObject *newManagedObject = [self managedObjectWithDictionaryOrUniqueFieldValue:value forEntity:destinationEntity bundle:bundleOrNil];
+			NSManagedObject *newManagedObject = [self managedObjectWithDictionaryOrUniqueFieldValue:value forEntity:destinationEntity superUniqueFieldValue:uniqueFieldValue bundle:bundleOrNil];
 			
 			newValue = newManagedObject;
 		}
@@ -151,14 +169,14 @@
 	[self setValue:newValue forKey:relationship];
 }
 
-- (id)managedObjectWithDictionaryOrUniqueFieldValue:(id)value forEntity:(NSEntityDescription *)entity bundle:(NSBundle *)bundleOrNil {
+- (id)managedObjectWithDictionaryOrUniqueFieldValue:(id)value forEntity:(NSEntityDescription *)entity superUniqueFieldValue:(id)superUniqueFieldValue bundle:(NSBundle *)bundleOrNil {
 	
 	id managedObject = nil;
 	NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
 	
 	if ([value isKindOfClass:[NSDictionary class]]) {
 		
-		managedObject = [NSManagedObject managedObjectWithDictionary:value entity:entity managedObjectContext:managedObjectContext bundle:bundleOrNil];
+		managedObject = [NSManagedObject managedObjectWithDictionary:value entity:entity managedObjectContext:managedObjectContext superUniqueFieldValue:superUniqueFieldValue bundle:bundleOrNil];
 	}
 	else if ([value isKindOfClass:[NSNumber class]] || [value isKindOfClass:[NSString class]]) {
 		
@@ -193,8 +211,109 @@
 
 - (NSString *)JSONRepresentationWithToManyBehaviour:(JSONRelationshipMappingBehaviour)toManyBehaviour toOneBehaviour:(JSONRelationshipMappingBehaviour)toOneBehaviour bundle:(NSBundle *)bundleOrNil {
 	
-	//TODO: Compute JSON
+	return [[self dictionaryRepresentationWithToManyBehaviour:toManyBehaviour toOneBehaviour:toOneBehaviour bundle:bundleOrNil] JSONRepresentation];
+}
+/*
+- (NSDictionary *)dictionaryRepresentationWithToManyBehaviour:(JSONRelationshipMappingBehaviour)toManyBehaviour toOneBehaviour:(JSONRelationshipMappingBehaviour)toOneBehaviour bundle:(NSBundle *)bundleOrNil {
+	
+	return [self dictionaryRepresentationWithToManyBehaviour:toManyBehaviour toOneBehaviour:toOneBehaviour bundle:bundleOrNil excludingRelationship:nil];
+}
+
+- (NSDictionary *)dictionaryRepresentationWithToManyBehaviour:(JSONRelationshipMappingBehaviour)toManyBehaviour toOneBehaviour:(JSONRelationshipMappingBehaviour)toOneBehaviour bundle:(NSBundle *)bundleOrNil excludingRelationship:(NSRelationshipDescription *)excludedRelationship {
+	
+	JCMappingModel *mappingModel = [JCMappingModel mappingModelWithEntity:[self entity] bundle:bundleOrNil];
+	NSMutableDictionary *mutableValues = [[NSMutableDictionary alloc] initWithCapacity:[mappingModel.propertiesMap count]];
+	
+	[mutableValues addEntriesFromDictionary:[self dictionaryValuesForAttributesFromMappingModel:mappingModel]];
+	[mutableValues addEntriesFromDictionary:[self dictionaryValuesForRelationshipsFromMappingModel:mappingModel toManyBehaviour:toManyBehaviour toOneBehaviour:toOneBehaviour excludingRelationship:excludedRelationship]];
+	
+	NSDictionary *dictionaryRepresentation = [NSDictionary dictionaryWithDictionary:mutableValues];
+	
+	[mutableValues release];
+	
+	return dictionaryRepresentation;
+}
+							 
+- (NSDictionary *)dictionaryValuesForAttributesFromMappingModel:(JCMappingModel *)mappingModel {
+	
+	NSArray *attributes = [[[self entity] attributesByName] allValues];
+	NSMutableDictionary *mutableValues = [[NSMutableDictionary alloc] initWithCapacity:[attributes count]];
+	
+	for (NSAttributeDescription *attribute in attributes) {
+		
+		NSString *attributeName = attribute.name;
+		
+		id value = [mappingModel valueForPropertyName:attributeName fromManagedObject:self];
+		value = [mappingModel reverseTransformedValue:value forPropertyName:attributeName];
+		
+		NSString *mappedPropertyName = [mappingModel.propertiesMap objectForKey:attributeName];
+		
+		[mutableValues setValue:value forKeyPath:mappedPropertyName];
+	}
+	
+	NSDictionary *result = [NSDictionary dictionaryWithDictionary:mutableValues];
+	
+	[mutableValues release];
+	
+	return result;
+}
+
+- (NSDictionary *)dictionaryValuesForRelationshipsFromMappingModel:(JCMappingModel *)mappingModel toManyBehaviour:(JSONRelationshipMappingBehaviour)toManyBehaviour toOneBehaviour:(JSONRelationshipMappingBehaviour)toOneBehaviour excludingRelationship:(NSRelationshipDescription *)excludedRelationship {
+	
+	NSArray *relationships = [[[self entity] relationshipsByName] allValues];
+	NSMutableDictionary *mutableValues = [[NSMutableDictionary alloc] initWithCapacity:[relationships count]];
+	
+	for (NSRelationshipDescription *relationship in relationships) {
+		
+		if (relationship == excludedRelationship)
+			continue;
+		
+		NSString *relationshipName = relationship.name;
+		
+		id value = [self valueForRelationship:relationship fromMappingModel:mappingModel toManyBehaviour:toManyBehaviour toOneBehaviour:toOneBehaviour];
+		value = [mappingModel reverseTransformedValue:value forPropertyName:relationshipName];
+		
+		NSString *mappedPropertyName = [mappingModel.propertiesMap objectForKey:relationshipName];
+		
+		[mutableValues setValue:value forKeyPath:mappedPropertyName];
+	}
+	
+	NSDictionary *result = [NSDictionary dictionaryWithDictionary:mutableValues];
+	
+	[mutableValues release];
+	
+	return result;
+}
+
+- (id)valueForRelationship:(NSRelationshipDescription *)relationship fromMappingModel:(JCMappingModel *)mappingModel toManyBehaviour:(JSONRelationshipMappingBehaviour)toManyBehaviour toOneBehaviour:(JSONRelationshipMappingBehaviour)toOneBehaviour bundle:(NSBundle *)bundleOrNil {
+	
+	id value = nil;
+	NSString *relationshipName = relationship.name;
+	
+	if ([relationship isToMany]) {
+		
+		if (toManyBehaviour == JSONRelationshipMappingMapUsingJSON) {
+			
+			value = [mappingModel valueForPropertyName:relationshipName fromManagedObject:self];
+			
+			if ([[relationship inverseRelationship] isToMany]) {
+				
+				//many-to-many relationship, so map inverse using unique field
+				value = [value dictionaryRepresentationWithToManyBehaviour:JSONRelationshipMappingMapUsingUniqueField toOneBehaviour:JSONRelationshipMappingMapUsingUniqueField bundle:bundleOrNil];
+			}
+			else {
+			}
+		}
+		else if (toManyBehaviour == JSONRelationshipMappingMapUsingUniqueField) {
+			
+		}
+	}
+	else {
+		
+	}
+	
 	return nil;
 }
+ */
 
 @end
