@@ -46,7 +46,7 @@
 	NSDictionary *propertiesMap = mappingModel.propertiesMap;
 	NSArray *relationshipNames = [[self relationshipsByName] allKeys];
 	
-	return [propertiesMap dictionaryWithValuesForKeys:relationshipNames];
+	return [propertiesMap dictionaryWithAvailableValuesForKeys:relationshipNames];
 }
 
 @end

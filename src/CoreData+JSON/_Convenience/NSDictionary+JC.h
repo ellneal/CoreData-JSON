@@ -37,8 +37,8 @@
 - (NSDictionary *)dictionaryByAddingEntriesFromDictionary:(NSDictionary *)otherDictionary;
 - (NSDictionary *)dictionaryByRemovingObjectsForKeys:(NSArray *)keys;
 
-- (id)nilIfNSNullObjectForKey:(id)key;
-- (id)nilIfNSNullObjectForKeyPath:(NSString *)keyPath;
+//- (id)nilIfNSNullObjectForKey:(id)key;
+- (id)objectForKeyPath:(NSString *)keyPath;
 
 @end
 

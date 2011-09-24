@@ -31,7 +31,7 @@
 #import "CoreData+JSON.h"
 #import "CoreData+JSON_Private.h"
 #import "ConvenienceCategories.h"
-#import "JSON.h"
+#import "SBJson.h"
 
 @interface NSManagedObject (JSONPrivate)
 
@@ -111,6 +111,14 @@
 		NSString *mappedKey = [mappingModel.propertiesMap objectForKey:attribute];
 		
 		id newValue = [mappingModel valueForMappedPropertyName:mappedKey fromDictionary:dictionary withSuperUniqueFieldValue:superUniqueFieldValue];
+        
+        //if nil is returned, don't do anything
+        if (newValue == nil)
+            continue;
+        //convert null to nil to erase the attribute value
+        if (newValue == [NSNull null])
+            newValue = nil;
+        
 		newValue = [mappingModel transformedValue:newValue forPropertyName:attribute];
 		
 		[self setValue:newValue forKey:attribute];
@@ -127,7 +135,16 @@
 		NSString *mappedKey = [mappingModel.propertiesMap objectForKey:relationship];
 		
 		id newValue = [mappingModel valueForMappedPropertyName:mappedKey fromDictionary:dictionary];
+        
+        //if nil is returned, don't do anything
+        if (newValue == nil)
+            continue;
+        //convert null to nil to erase the attribute value
+        if (newValue == [NSNull null])
+            newValue = nil;
+        
 		newValue = [mappingModel transformedValue:newValue forPropertyName:relationship];
+        
 		[self setValue:newValue forRelationship:relationship uniqueFieldValue:uniqueFieldValue bundle:bundleOrNil];
 	}
 }
@@ -135,6 +152,10 @@
 - (void)setValue:(id)value forRelationship:(NSString *)relationship uniqueFieldValue:(id)uniqueFieldValue bundle:(NSBundle *)bundleOrNil {
 	
 	id newValue = value;
+    
+    if ([relationship isEqualToString:@"revisions"] && value != nil) {
+        //NSLog(@"%@", value);
+    }
 	
 	if (value != nil) {
 		
@@ -149,7 +170,7 @@
 			NSMutableSet *relationshipValues = [[NSMutableSet alloc] initWithCapacity:[value count]];
 			
 			for (id subValue in value) {
-				
+                
 				NSManagedObject *newManagedObject = [self managedObjectWithDictionaryOrUniqueFieldValue:subValue forEntity:destinationEntity superUniqueFieldValue:uniqueFieldValue bundle:bundleOrNil];
 				
 				[relationshipValues addObject:newManagedObject];

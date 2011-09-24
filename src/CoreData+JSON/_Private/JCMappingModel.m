@@ -92,7 +92,7 @@
 		
 		if (superMap != nil) {
 			propertiesMap = [propertiesMap dictionaryByAddingEntriesFromDictionary:superMap.propertiesMap];
-			valueTransformers = [propertiesMap dictionaryByAddingEntriesFromDictionary:superMap.valueTransformers];
+			valueTransformers = [valueTransformers dictionaryByAddingEntriesFromDictionary:superMap.valueTransformers];
 		}
 		
 		propertiesMap_ = [propertiesMap retain];
@@ -196,7 +196,7 @@
 	if ([self mappedKeyIsExpression:mappedPropertyName])
 		value = [self valueForExpression:[mappedPropertyName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] fromDictionary:dictionary withSuperUniqueFieldValue:superUniqueFieldValue];
 	else
-		value = [dictionary nilIfNSNullObjectForKeyPath:mappedPropertyName];
+		value = [dictionary objectForKeyPath:mappedPropertyName];
 	
 	return value;
 }

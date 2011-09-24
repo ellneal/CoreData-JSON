@@ -84,22 +84,22 @@
 	return result;
 }
 
-- (id)nilIfNSNullObjectForKey:(id)key {
-	
-	id value = [self objectForKey:key];
-	
-	if (value == [NSNull null])
-		return nil;
-	
-	return value;
-}
+//- (id)nilIfNSNullObjectForKey:(id)key {
+//	
+//	id value = [self objectForKey:key];
+//	
+//	if (value == [NSNull null])
+//		return nil;
+//	
+//	return value;
+//}
 
-- (id)nilIfNSNullObjectForKeyPath:(NSString *)keyPath {
+- (id)objectForKeyPath:(NSString *)keyPath {
 	
 	id value = [self valueForKeyPath:keyPath];
 	
-	if (value == [NSNull null])
-		return nil;
+//	if (value == [NSNull null])
+//		return nil;
 	
 	return value;
 }
