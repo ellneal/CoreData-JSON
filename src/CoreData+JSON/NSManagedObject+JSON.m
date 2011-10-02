@@ -165,7 +165,7 @@
 		if ([relationshipDescription isToMany]) {
 			
 			if (![value isKindOfClass:[NSArray class]])
-				[NSException raise:@"InvalidToManyRelationship" format:@"To-many relationships must be represented by an array."];
+				[NSException raise:@"JCInvalidToManyRelationshipException" format:@"To-many relationships must be represented by an array."];
 			
 			NSMutableSet *relationshipValues = [[NSMutableSet alloc] initWithCapacity:[value count]];
 			
