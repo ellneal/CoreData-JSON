@@ -51,7 +51,7 @@
 	
 	NSError *addStoreError = nil;
 	if (![coordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:options error:&addStoreError]) {
-		NSLog(@"Error setting up in-memory store unit test: ", addStoreError);
+		NSLog(@"Error setting up in-memory store unit test: %@", addStoreError);
 		return nil;
 	}
 	

@@ -37,9 +37,6 @@
 	
 	NSString *testKey = @"testNull";
 	
-	NSDictionary *testDictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSNull null], testKey, nil];
-	id nilValue = [testDictionary nilIfNSNullObjectForKey:testKey];
-	STAssertNil(nilValue, nil);
 	
 	NSMutableDictionary *testMutableDictionary = [[[NSMutableDictionary alloc] initWithCapacity:1] autorelease];
 	[testMutableDictionary setNSNullIfNilObject:nil forKey:testKey];

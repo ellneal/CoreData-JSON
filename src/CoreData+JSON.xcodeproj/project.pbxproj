@@ -54,7 +54,6 @@
 		4945B5BD12C3CD540000EF85 /* testExpressionEntity.jcmap in Resources */ = {isa = PBXBuildFile; fileRef = 4945B57E12C3C0690000EF85 /* testExpressionEntity.jcmap */; };
 		49844F041438E34400069A7A /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 49844F021438E34400069A7A /* JSONKit.h */; };
 		49844F051438E34400069A7A /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 49844F031438E34400069A7A /* JSONKit.m */; };
-		49844F061438E34400069A7A /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 49844F031438E34400069A7A /* JSONKit.m */; };
 		49A16B5312C942C6009809B6 /* CoreData+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A16B5212C942C6009809B6 /* CoreData+JSON.m */; };
 		49A16B9B12C95C2F009809B6 /* TestSuperEntity.jcmap in Resources */ = {isa = PBXBuildFile; fileRef = 49A16B9A12C95C2F009809B6 /* TestSuperEntity.jcmap */; };
 		49A16B9D12C95CDF009809B6 /* TestSubEntity.jcmap in Resources */ = {isa = PBXBuildFile; fileRef = 49A16B9C12C95CDF009809B6 /* TestSubEntity.jcmap */; };
@@ -468,7 +467,6 @@
 				4914495F12BE693E00D29E43 /* NSManagedObjectContext+JSON_Tests.m in Sources */,
 				49450D5312BE811B00F0CE0F /* TestConvenienceCategories.m in Sources */,
 				49450EF212BF01B000F0CE0F /* TestNumberToStringTransformer.m in Sources */,
-				49844F061438E34400069A7A /* JSONKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
