@@ -209,7 +209,7 @@
 	}
 	else {
 		
-		[NSException raise:@"InvalidRelationshipValue" format:@"Relationship values must be represented by a dictionary of values for the destination entity, or a value for the destination entity's UniqueField."];
+		[NSException raise:@"JCInvalidRelationshipValueException" format:@"Relationship values must be represented by a dictionary of values for the destination entity, or a value for the destination entity's UniqueField."];
 	}
 	
 	return managedObject;
