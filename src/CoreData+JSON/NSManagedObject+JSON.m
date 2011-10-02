@@ -31,7 +31,7 @@
 #import "CoreData+JSON.h"
 #import "CoreData+JSON_Private.h"
 #import "ConvenienceCategories.h"
-#import "SBJson.h"
+#import "JSONKit.h"
 
 @interface NSManagedObject (JSONPrivate)
 
@@ -68,7 +68,7 @@
 
 + (id)managedObjectWithJSON:(NSString *)json entity:(NSEntityDescription *)entity managedObjectContext:(NSManagedObjectContext *)managedObjectContext superUniqueFieldValue:(id)superUniqueFieldValue bundle:(NSBundle *)bundleOrNil {
 	
-	NSDictionary *jsonValues = [json JSONValue];
+	NSDictionary *jsonValues = [json objectFromJSONString];
 	
 	return [self managedObjectWithDictionary:jsonValues entity:entity managedObjectContext:managedObjectContext superUniqueFieldValue:superUniqueFieldValue bundle:bundleOrNil];
 }
@@ -232,7 +232,7 @@
 
 - (NSString *)JSONRepresentationWithToManyBehaviour:(JSONRelationshipMappingBehaviour)toManyBehaviour toOneBehaviour:(JSONRelationshipMappingBehaviour)toOneBehaviour bundle:(NSBundle *)bundleOrNil {
 	
-	return [[self dictionaryRepresentationWithToManyBehaviour:toManyBehaviour toOneBehaviour:toOneBehaviour bundle:bundleOrNil] JSONRepresentation];
+	return [[self dictionaryRepresentationWithToManyBehaviour:toManyBehaviour toOneBehaviour:toOneBehaviour bundle:bundleOrNil] JSONString];
 }
 /*
 - (NSDictionary *)dictionaryRepresentationWithToManyBehaviour:(JSONRelationshipMappingBehaviour)toManyBehaviour toOneBehaviour:(JSONRelationshipMappingBehaviour)toOneBehaviour bundle:(NSBundle *)bundleOrNil {
