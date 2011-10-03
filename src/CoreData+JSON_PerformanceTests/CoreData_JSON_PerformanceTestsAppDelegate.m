@@ -36,7 +36,7 @@
     timerStart = [NSDate date];
     
     JCImporter *importer = [[JCImporter alloc] initWithManagedObjectContext:self.managedObjectContext bundle:nil];
-    [importer importObjectsFromArray:jsonObjects forEntity:entity withBatchSize:100];
+    [importer importObjectsFromArray:jsonObjects forEntity:entity withBatchSize:1000];
     [importer release];
     
     [self saveContext];

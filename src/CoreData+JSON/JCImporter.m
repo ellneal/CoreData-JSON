@@ -99,7 +99,7 @@
         if (useBatching && i % batchSize == 0) {
             NSLog(@"Generated %d objects", i);
             [self.managedObjectContext save:nil];
-//            [self.managedObjectContext reset];
+            [self.managedObjectContext reset];
             
             [pool drain];
             pool = [[NSAutoreleasePool alloc] init];
