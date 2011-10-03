@@ -152,10 +152,6 @@
 - (void)setValue:(id)value forRelationship:(NSString *)relationship uniqueFieldValue:(id)uniqueFieldValue bundle:(NSBundle *)bundleOrNil {
 	
 	id newValue = value;
-    
-    if ([relationship isEqualToString:@"revisions"] && value != nil) {
-        //NSLog(@"%@", value);
-    }
 	
 	if (value != nil) {
 		
