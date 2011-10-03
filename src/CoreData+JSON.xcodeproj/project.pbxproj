@@ -22,7 +22,6 @@
 		491446B712BD911800D29E43 /* TestBlankPropertiesMap.jcmap in Resources */ = {isa = PBXBuildFile; fileRef = 491446B612BD911800D29E43 /* TestBlankPropertiesMap.jcmap */; };
 		491446BD12BD928400D29E43 /* TestValidMappingModel.jcmap in Resources */ = {isa = PBXBuildFile; fileRef = 491446BC12BD928400D29E43 /* TestValidMappingModel.jcmap */; };
 		491446E912BD961E00D29E43 /* TestIncorrectUniqueField.jcmap in Resources */ = {isa = PBXBuildFile; fileRef = 491446E812BD961E00D29E43 /* TestIncorrectUniqueField.jcmap */; };
-		4914476212BDA7B100D29E43 /* NSDictionary+JC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4914476112BDA7B100D29E43 /* NSDictionary+JC.m */; };
 		4914476F12BE150700D29E43 /* JCMappingModelCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 4914476D12BE150700D29E43 /* JCMappingModelCache.h */; };
 		4914477012BE150700D29E43 /* JCMappingModelCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4914476E12BE150700D29E43 /* JCMappingModelCache.m */; };
 		4914477512BE153300D29E43 /* NSDictionary+JC.h in Headers */ = {isa = PBXBuildFile; fileRef = 4914476012BDA7B100D29E43 /* NSDictionary+JC.h */; };
@@ -32,7 +31,7 @@
 		491447C012BE212A00D29E43 /* NSFetchRequest+JC.h in Headers */ = {isa = PBXBuildFile; fileRef = 491447BE12BE212A00D29E43 /* NSFetchRequest+JC.h */; };
 		491447C112BE212A00D29E43 /* NSFetchRequest+JC.m in Sources */ = {isa = PBXBuildFile; fileRef = 491447BF12BE212A00D29E43 /* NSFetchRequest+JC.m */; };
 		4914485E12BE3B4600D29E43 /* ConvenienceCategories.h in Headers */ = {isa = PBXBuildFile; fileRef = 4914485D12BE3B4600D29E43 /* ConvenienceCategories.h */; };
-		4914489F12BE43DC00D29E43 /* CoreData+JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 4914489E12BE43DC00D29E43 /* CoreData+JSON.h */; };
+		4914489F12BE43DC00D29E43 /* CoreData+JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 4914489E12BE43DC00D29E43 /* CoreData+JSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		491448A712BE53B900D29E43 /* TestModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 491448A612BE53B900D29E43 /* TestModel.xcdatamodel */; };
 		491448E112BE5FAB00D29E43 /* NSManagedObjectContext+UnitTesting.m in Sources */ = {isa = PBXBuildFile; fileRef = 491448E012BE5FAB00D29E43 /* NSManagedObjectContext+UnitTesting.m */; };
 		4914491712BE613C00D29E43 /* NSManagedObject+JSON_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4914491612BE613C00D29E43 /* NSManagedObject+JSON_Tests.m */; };
@@ -54,6 +53,22 @@
 		4945B5BD12C3CD540000EF85 /* testExpressionEntity.jcmap in Resources */ = {isa = PBXBuildFile; fileRef = 4945B57E12C3C0690000EF85 /* testExpressionEntity.jcmap */; };
 		49844F041438E34400069A7A /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 49844F021438E34400069A7A /* JSONKit.h */; };
 		49844F051438E34400069A7A /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 49844F031438E34400069A7A /* JSONKit.m */; };
+		49844F121438EF5300069A7A /* JCImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 49844F101438EF5300069A7A /* JCImporter.h */; };
+		49844F131438EF5300069A7A /* JCImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 49844F111438EF5300069A7A /* JCImporter.m */; };
+		49844F1E143919F800069A7A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49844F1D143919F800069A7A /* UIKit.framework */; };
+		49844F1F143919F800069A7A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+		49844F21143919F800069A7A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49844F20143919F800069A7A /* CoreGraphics.framework */; };
+		49844F22143919F800069A7A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4914446F12BD3C1300D29E43 /* CoreData.framework */; };
+		49844F28143919F800069A7A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 49844F26143919F800069A7A /* InfoPlist.strings */; };
+		49844F2A143919F800069A7A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 49844F29143919F800069A7A /* main.m */; };
+		49844F2E143919F800069A7A /* CoreData_JSON_PerformanceTestsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49844F2D143919F800069A7A /* CoreData_JSON_PerformanceTestsAppDelegate.m */; };
+		49844F31143919F800069A7A /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49844F2F143919F800069A7A /* MainWindow.xib */; };
+		49844F34143919F800069A7A /* CoreData_JSON_PerformanceTests.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49844F32143919F800069A7A /* CoreData_JSON_PerformanceTests.xcdatamodeld */; };
+		49844F3C14391E2D00069A7A /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 49844F3B14391E2D00069A7A /* data.json */; };
+		49844F3D14392D0200069A7A /* libCoreData_JSON.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC07E0554694100DB518D /* libCoreData_JSON.a */; };
+		49844F3F14392D3600069A7A /* Entity1.jcmap in Resources */ = {isa = PBXBuildFile; fileRef = 49844F3E14392D3600069A7A /* Entity1.jcmap */; };
+		49844F4114392D3E00069A7A /* Entity2.jcmap in Resources */ = {isa = PBXBuildFile; fileRef = 49844F4014392D3E00069A7A /* Entity2.jcmap */; };
+		49844F421439310400069A7A /* NSDictionary+JC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4914476112BDA7B100D29E43 /* NSDictionary+JC.m */; };
 		49A16B5312C942C6009809B6 /* CoreData+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A16B5212C942C6009809B6 /* CoreData+JSON.m */; };
 		49A16B9B12C95C2F009809B6 /* TestSuperEntity.jcmap in Resources */ = {isa = PBXBuildFile; fileRef = 49A16B9A12C95C2F009809B6 /* TestSuperEntity.jcmap */; };
 		49A16B9D12C95CDF009809B6 /* TestSubEntity.jcmap in Resources */ = {isa = PBXBuildFile; fileRef = 49A16B9C12C95CDF009809B6 /* TestSubEntity.jcmap */; };
@@ -63,6 +78,13 @@
 
 /* Begin PBXContainerItemProxy section */
 		4914446312BD3BBB00D29E43 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = "CoreData+JSON";
+		};
+		49844F3814391ACB00069A7A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
 			proxyType = 1;
@@ -127,6 +149,22 @@
 		4945B57E12C3C0690000EF85 /* testExpressionEntity.jcmap */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = testExpressionEntity.jcmap; sourceTree = "<group>"; };
 		49844F021438E34400069A7A /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		49844F031438E34400069A7A /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		49844F101438EF5300069A7A /* JCImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCImporter.h; sourceTree = "<group>"; };
+		49844F111438EF5300069A7A /* JCImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCImporter.m; sourceTree = "<group>"; };
+		49844F1B143919F800069A7A /* CoreData+JSON_PerformanceTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoreData+JSON_PerformanceTests.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		49844F1D143919F800069A7A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		49844F20143919F800069A7A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		49844F25143919F800069A7A /* CoreData+JSON_PerformanceTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CoreData+JSON_PerformanceTests-Info.plist"; sourceTree = "<group>"; };
+		49844F27143919F800069A7A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		49844F29143919F800069A7A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		49844F2B143919F800069A7A /* CoreData+JSON_PerformanceTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoreData+JSON_PerformanceTests-Prefix.pch"; sourceTree = "<group>"; };
+		49844F2C143919F800069A7A /* CoreData_JSON_PerformanceTestsAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreData_JSON_PerformanceTestsAppDelegate.h; sourceTree = "<group>"; };
+		49844F2D143919F800069A7A /* CoreData_JSON_PerformanceTestsAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreData_JSON_PerformanceTestsAppDelegate.m; sourceTree = "<group>"; };
+		49844F30143919F800069A7A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		49844F33143919F800069A7A /* CoreData_JSON_PerformanceTests.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData_JSON_PerformanceTests.xcdatamodel; sourceTree = "<group>"; };
+		49844F3B14391E2D00069A7A /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
+		49844F3E14392D3600069A7A /* Entity1.jcmap */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = Entity1.jcmap; sourceTree = "<group>"; };
+		49844F4014392D3E00069A7A /* Entity2.jcmap */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = Entity2.jcmap; sourceTree = "<group>"; };
 		49A16B5212C942C6009809B6 /* CoreData+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CoreData+JSON.m"; path = "CoreData+JSON/_Private/CoreData+JSON.m"; sourceTree = "<group>"; };
 		49A16B9A12C95C2F009809B6 /* TestSuperEntity.jcmap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = TestSuperEntity.jcmap; path = LogicTests/_JCMappingModelTestObjects/TestSuperEntity.jcmap; sourceTree = "<group>"; };
 		49A16B9C12C95CDF009809B6 /* TestSubEntity.jcmap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = TestSubEntity.jcmap; path = LogicTests/_JCMappingModelTestObjects/TestSubEntity.jcmap; sourceTree = "<group>"; };
@@ -142,6 +180,18 @@
 			files = (
 				491444DB12BD555F00D29E43 /* CoreData.framework in Frameworks */,
 				4914461E12BD683200D29E43 /* libCoreData_JSON.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		49844F18143919F800069A7A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49844F3D14392D0200069A7A /* libCoreData_JSON.a in Frameworks */,
+				49844F1E143919F800069A7A /* UIKit.framework in Frameworks */,
+				49844F1F143919F800069A7A /* Foundation.framework in Frameworks */,
+				49844F21143919F800069A7A /* CoreGraphics.framework in Frameworks */,
+				49844F22143919F800069A7A /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,6 +212,7 @@
 			children = (
 				D2AAC07E0554694100DB518D /* libCoreData_JSON.a */,
 				4914445E12BD3B9F00D29E43 /* UnitTests.octest */,
+				49844F1B143919F800069A7A /* CoreData+JSON_PerformanceTests.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -172,6 +223,7 @@
 				49844F011438E34400069A7A /* JSONKit */,
 				08FB77AEFE84172EC02AAC07 /* CoreData+JSON */,
 				4914446B12BD3BD200D29E43 /* LogicTests */,
+				49844F23143919F800069A7A /* CoreData+JSON_PerformanceTests */,
 				32C88DFF0371C24200C91783 /* Other Sources */,
 				0867D69AFE84028FC02AAC07 /* Frameworks */,
 				034768DFFF38A50411DB9C8B /* Products */,
@@ -185,6 +237,8 @@
 			children = (
 				4914446F12BD3C1300D29E43 /* CoreData.framework */,
 				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
+				49844F1D143919F800069A7A /* UIKit.framework */,
+				49844F20143919F800069A7A /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -300,6 +354,8 @@
 				491444B512BD44B700D29E43 /* JCMappingModel.m */,
 				4914476D12BE150700D29E43 /* JCMappingModelCache.h */,
 				4914476E12BE150700D29E43 /* JCMappingModelCache.m */,
+				49844F101438EF5300069A7A /* JCImporter.h */,
+				49844F111438EF5300069A7A /* JCImporter.m */,
 			);
 			name = Private;
 			sourceTree = "<group>";
@@ -311,6 +367,32 @@
 				49844F031438E34400069A7A /* JSONKit.m */,
 			);
 			path = JSONKit;
+			sourceTree = "<group>";
+		};
+		49844F23143919F800069A7A /* CoreData+JSON_PerformanceTests */ = {
+			isa = PBXGroup;
+			children = (
+				49844F2C143919F800069A7A /* CoreData_JSON_PerformanceTestsAppDelegate.h */,
+				49844F2D143919F800069A7A /* CoreData_JSON_PerformanceTestsAppDelegate.m */,
+				49844F2F143919F800069A7A /* MainWindow.xib */,
+				49844F3B14391E2D00069A7A /* data.json */,
+				49844F32143919F800069A7A /* CoreData_JSON_PerformanceTests.xcdatamodeld */,
+				49844F24143919F800069A7A /* Supporting Files */,
+				49844F3E14392D3600069A7A /* Entity1.jcmap */,
+				49844F4014392D3E00069A7A /* Entity2.jcmap */,
+			);
+			path = "CoreData+JSON_PerformanceTests";
+			sourceTree = "<group>";
+		};
+		49844F24143919F800069A7A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				49844F25143919F800069A7A /* CoreData+JSON_PerformanceTests-Info.plist */,
+				49844F26143919F800069A7A /* InfoPlist.strings */,
+				49844F29143919F800069A7A /* main.m */,
+				49844F2B143919F800069A7A /* CoreData+JSON_PerformanceTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -335,6 +417,7 @@
 				49450E6812BEF48D00F0CE0F /* TestToDateValueTransformer.h in Headers */,
 				4945B55412C39E0F0000EF85 /* NSString+JC.h in Headers */,
 				49844F041438E34400069A7A /* JSONKit.h in Headers */,
+				49844F121438EF5300069A7A /* JCImporter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,6 +442,24 @@
 			productName = UnitTests;
 			productReference = 4914445E12BD3B9F00D29E43 /* UnitTests.octest */;
 			productType = "com.apple.product-type.bundle";
+		};
+		49844F1A143919F800069A7A /* CoreData+JSON_PerformanceTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 49844F37143919F800069A7A /* Build configuration list for PBXNativeTarget "CoreData+JSON_PerformanceTests" */;
+			buildPhases = (
+				49844F17143919F800069A7A /* Sources */,
+				49844F18143919F800069A7A /* Frameworks */,
+				49844F19143919F800069A7A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				49844F3914391ACB00069A7A /* PBXTargetDependency */,
+			);
+			name = "CoreData+JSON_PerformanceTests";
+			productName = "CoreData+JSON_PerformanceTests";
+			productReference = 49844F1B143919F800069A7A /* CoreData+JSON_PerformanceTests.app */;
+			productType = "com.apple.product-type.application";
 		};
 		D2AAC07D0554694100DB518D /* CoreData+JSON */ = {
 			isa = PBXNativeTarget;
@@ -395,6 +496,7 @@
 				Japanese,
 				French,
 				German,
+				en,
 			);
 			mainGroup = 0867D691FE84028FC02AAC07 /* CoreData+JSON */;
 			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
@@ -403,6 +505,7 @@
 			targets = (
 				D2AAC07D0554694100DB518D /* CoreData+JSON */,
 				4914445D12BD3B9F00D29E43 /* UnitTests */,
+				49844F1A143919F800069A7A /* CoreData+JSON_PerformanceTests */,
 			);
 		};
 /* End PBXProject section */
@@ -434,6 +537,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		49844F19143919F800069A7A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49844F28143919F800069A7A /* InfoPlist.strings in Resources */,
+				49844F31143919F800069A7A /* MainWindow.xib in Resources */,
+				49844F3C14391E2D00069A7A /* data.json in Resources */,
+				49844F3F14392D3600069A7A /* Entity1.jcmap in Resources */,
+				49844F4114392D3E00069A7A /* Entity2.jcmap in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -459,7 +574,6 @@
 			files = (
 				491444CE12BD546500D29E43 /* JCMappingModelTests.m in Sources */,
 				4914455312BD562900D29E43 /* FauxEntityDescription.m in Sources */,
-				4914476212BDA7B100D29E43 /* NSDictionary+JC.m in Sources */,
 				4914478C12BE19FE00D29E43 /* JCMappingModelCacheTests.m in Sources */,
 				491448A712BE53B900D29E43 /* TestModel.xcdatamodel in Sources */,
 				491448E112BE5FAB00D29E43 /* NSManagedObjectContext+UnitTesting.m in Sources */,
@@ -467,6 +581,16 @@
 				4914495F12BE693E00D29E43 /* NSManagedObjectContext+JSON_Tests.m in Sources */,
 				49450D5312BE811B00F0CE0F /* TestConvenienceCategories.m in Sources */,
 				49450EF212BF01B000F0CE0F /* TestNumberToStringTransformer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		49844F17143919F800069A7A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49844F2A143919F800069A7A /* main.m in Sources */,
+				49844F2E143919F800069A7A /* CoreData_JSON_PerformanceTestsAppDelegate.m in Sources */,
+				49844F34143919F800069A7A /* CoreData_JSON_PerformanceTests.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,6 +609,8 @@
 				4945B55512C39E0F0000EF85 /* NSString+JC.m in Sources */,
 				49A16B5312C942C6009809B6 /* CoreData+JSON.m in Sources */,
 				49844F051438E34400069A7A /* JSONKit.m in Sources */,
+				49844F131438EF5300069A7A /* JCImporter.m in Sources */,
+				49844F421439310400069A7A /* NSDictionary+JC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,7 +622,31 @@
 			target = D2AAC07D0554694100DB518D /* CoreData+JSON */;
 			targetProxy = 4914446312BD3BBB00D29E43 /* PBXContainerItemProxy */;
 		};
+		49844F3914391ACB00069A7A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2AAC07D0554694100DB518D /* CoreData+JSON */;
+			targetProxy = 49844F3814391ACB00069A7A /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		49844F26143919F800069A7A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				49844F27143919F800069A7A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		49844F2F143919F800069A7A /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				49844F30143919F800069A7A /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		1DEB921F08733DC00010E9CD /* Debug */ = {
@@ -618,6 +768,58 @@
 			};
 			name = Release;
 		};
+		49844F35143919F800069A7A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreData+JSON_PerformanceTests/CoreData+JSON_PerformanceTests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				INFOPLIST_FILE = "CoreData+JSON_PerformanceTests/CoreData+JSON_PerformanceTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		49844F36143919F800069A7A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreData+JSON_PerformanceTests/CoreData+JSON_PerformanceTests-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				INFOPLIST_FILE = "CoreData+JSON_PerformanceTests/CoreData+JSON_PerformanceTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -648,7 +850,28 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		49844F37143919F800069A7A /* Build configuration list for PBXNativeTarget "CoreData+JSON_PerformanceTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49844F35143919F800069A7A /* Debug */,
+				49844F36143919F800069A7A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		49844F32143919F800069A7A /* CoreData_JSON_PerformanceTests.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				49844F33143919F800069A7A /* CoreData_JSON_PerformanceTests.xcdatamodel */,
+			);
+			currentVersion = 49844F33143919F800069A7A /* CoreData_JSON_PerformanceTests.xcdatamodel */;
+			path = CoreData_JSON_PerformanceTests.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
 }
