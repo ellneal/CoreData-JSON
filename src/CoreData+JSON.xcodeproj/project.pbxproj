@@ -27,7 +27,7 @@
 		4914477512BE153300D29E43 /* NSDictionary+JC.h in Headers */ = {isa = PBXBuildFile; fileRef = 4914476012BDA7B100D29E43 /* NSDictionary+JC.h */; };
 		4914478C12BE19FE00D29E43 /* JCMappingModelCacheTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4914478B12BE19FE00D29E43 /* JCMappingModelCacheTests.m */; };
 		491447A712BE1DC200D29E43 /* NSManagedObjectContext+JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 491447A512BE1DC200D29E43 /* NSManagedObjectContext+JSON.h */; };
-		491447A812BE1DC200D29E43 /* NSManagedObjectContext+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 491447A612BE1DC200D29E43 /* NSManagedObjectContext+JSON.m */; };
+		491447A812BE1DC200D29E43 /* NSManagedObject+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 491447A612BE1DC200D29E43 /* NSManagedObject+JSON.m */; };
 		491447C012BE212A00D29E43 /* NSFetchRequest+JC.h in Headers */ = {isa = PBXBuildFile; fileRef = 491447BE12BE212A00D29E43 /* NSFetchRequest+JC.h */; };
 		491447C112BE212A00D29E43 /* NSFetchRequest+JC.m in Sources */ = {isa = PBXBuildFile; fileRef = 491447BF12BE212A00D29E43 /* NSFetchRequest+JC.m */; };
 		4914485E12BE3B4600D29E43 /* ConvenienceCategories.h in Headers */ = {isa = PBXBuildFile; fileRef = 4914485D12BE3B4600D29E43 /* ConvenienceCategories.h */; };
@@ -96,12 +96,12 @@
 /* Begin PBXFileReference section */
 		4914445E12BD3B9F00D29E43 /* UnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4914446F12BD3C1300D29E43 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		4914449C12BD3E3E00D29E43 /* NSManagedObject+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObject+JSON.h"; path = "CoreData+JSON/NSManagedObject+JSON.h"; sourceTree = "<group>"; };
-		4914449D12BD3E3E00D29E43 /* NSManagedObject+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObject+JSON.m"; path = "CoreData+JSON/NSManagedObject+JSON.m"; sourceTree = "<group>"; };
+		4914449C12BD3E3E00D29E43 /* NSManagedObject+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+JSON.h"; sourceTree = "<group>"; };
+		4914449D12BD3E3E00D29E43 /* NSManagedObject+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+JSON.m"; sourceTree = "<group>"; };
 		491444B412BD44B700D29E43 /* JCMappingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JCMappingModel.h; path = "CoreData+JSON/_Private/JCMappingModel.h"; sourceTree = "<group>"; };
 		491444B512BD44B700D29E43 /* JCMappingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JCMappingModel.m; path = "CoreData+JSON/_Private/JCMappingModel.m"; sourceTree = "<group>"; };
-		491444CC12BD546500D29E43 /* JCMappingModelTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JCMappingModelTests.h; path = LogicTests/JCMappingModelTests.h; sourceTree = "<group>"; };
-		491444CD12BD546500D29E43 /* JCMappingModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JCMappingModelTests.m; path = LogicTests/JCMappingModelTests.m; sourceTree = "<group>"; };
+		491444CC12BD546500D29E43 /* JCMappingModelTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCMappingModelTests.h; sourceTree = "<group>"; };
+		491444CD12BD546500D29E43 /* JCMappingModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCMappingModelTests.m; sourceTree = "<group>"; };
 		4914455112BD562900D29E43 /* FauxEntityDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FauxEntityDescription.h; path = LogicTests/_JCMappingModelTestObjects/FauxEntityDescription.h; sourceTree = "<group>"; };
 		4914455212BD562900D29E43 /* FauxEntityDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FauxEntityDescription.m; path = LogicTests/_JCMappingModelTestObjects/FauxEntityDescription.m; sourceTree = "<group>"; };
 		4914464112BD8AAC00D29E43 /* TestMissingUniqueField.jcmap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = TestMissingUniqueField.jcmap; path = LogicTests/_JCMappingModelTestObjects/TestMissingUniqueField.jcmap; sourceTree = "<group>"; };
@@ -114,28 +114,28 @@
 		4914476112BDA7B100D29E43 /* NSDictionary+JC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+JC.m"; path = "CoreData+JSON/_Convenience/NSDictionary+JC.m"; sourceTree = "<group>"; };
 		4914476D12BE150700D29E43 /* JCMappingModelCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JCMappingModelCache.h; path = "CoreData+JSON/_Private/JCMappingModelCache.h"; sourceTree = "<group>"; };
 		4914476E12BE150700D29E43 /* JCMappingModelCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JCMappingModelCache.m; path = "CoreData+JSON/_Private/JCMappingModelCache.m"; sourceTree = "<group>"; };
-		4914478A12BE19FE00D29E43 /* JCMappingModelCacheTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JCMappingModelCacheTests.h; path = LogicTests/JCMappingModelCacheTests.h; sourceTree = "<group>"; };
-		4914478B12BE19FE00D29E43 /* JCMappingModelCacheTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JCMappingModelCacheTests.m; path = LogicTests/JCMappingModelCacheTests.m; sourceTree = "<group>"; };
-		491447A512BE1DC200D29E43 /* NSManagedObjectContext+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObjectContext+JSON.h"; path = "CoreData+JSON/NSManagedObjectContext+JSON.h"; sourceTree = "<group>"; };
-		491447A612BE1DC200D29E43 /* NSManagedObjectContext+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObjectContext+JSON.m"; path = "CoreData+JSON/NSManagedObjectContext+JSON.m"; sourceTree = "<group>"; };
+		4914478A12BE19FE00D29E43 /* JCMappingModelCacheTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCMappingModelCacheTests.h; sourceTree = "<group>"; };
+		4914478B12BE19FE00D29E43 /* JCMappingModelCacheTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCMappingModelCacheTests.m; sourceTree = "<group>"; };
+		491447A512BE1DC200D29E43 /* NSManagedObjectContext+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+JSON.h"; sourceTree = "<group>"; };
+		491447A612BE1DC200D29E43 /* NSManagedObject+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+JSON.m"; sourceTree = "<group>"; };
 		491447BE12BE212A00D29E43 /* NSFetchRequest+JC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFetchRequest+JC.h"; path = "CoreData+JSON/_Convenience/NSFetchRequest+JC.h"; sourceTree = "<group>"; };
 		491447BF12BE212A00D29E43 /* NSFetchRequest+JC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFetchRequest+JC.m"; path = "CoreData+JSON/_Convenience/NSFetchRequest+JC.m"; sourceTree = "<group>"; };
 		4914485D12BE3B4600D29E43 /* ConvenienceCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConvenienceCategories.h; path = "CoreData+JSON/_Convenience/ConvenienceCategories.h"; sourceTree = "<group>"; };
-		4914489E12BE43DC00D29E43 /* CoreData+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CoreData+JSON.h"; path = "CoreData+JSON/CoreData+JSON.h"; sourceTree = "<group>"; };
+		4914489E12BE43DC00D29E43 /* CoreData+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoreData+JSON.h"; sourceTree = "<group>"; };
 		491448A612BE53B900D29E43 /* TestModel.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; name = TestModel.xcdatamodel; path = LogicTests/_OtherTestObjects/TestModel.xcdatamodel; sourceTree = "<group>"; };
 		491448DF12BE5FAB00D29E43 /* NSManagedObjectContext+UnitTesting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObjectContext+UnitTesting.h"; path = "LogicTests/_OtherTestObjects/NSManagedObjectContext+UnitTesting.h"; sourceTree = "<group>"; };
 		491448E012BE5FAB00D29E43 /* NSManagedObjectContext+UnitTesting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObjectContext+UnitTesting.m"; path = "LogicTests/_OtherTestObjects/NSManagedObjectContext+UnitTesting.m"; sourceTree = "<group>"; };
-		4914491512BE613C00D29E43 /* NSManagedObject+JSON_Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObject+JSON_Tests.h"; path = "LogicTests/NSManagedObject+JSON_Tests.h"; sourceTree = "<group>"; };
-		4914491612BE613C00D29E43 /* NSManagedObject+JSON_Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObject+JSON_Tests.m"; path = "LogicTests/NSManagedObject+JSON_Tests.m"; sourceTree = "<group>"; };
+		4914491512BE613C00D29E43 /* NSManagedObject+JSON_Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+JSON_Tests.h"; sourceTree = "<group>"; };
+		4914491612BE613C00D29E43 /* NSManagedObject+JSON_Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+JSON_Tests.m"; sourceTree = "<group>"; };
 		4914492812BE624500D29E43 /* testEntity.jcmap */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; name = testEntity.jcmap; path = LogicTests/_OtherTestObjects/testEntity.jcmap; sourceTree = "<group>"; };
 		4914492A12BE625600D29E43 /* testRelatedEntity.jcmap */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; name = testRelatedEntity.jcmap; path = LogicTests/_OtherTestObjects/testRelatedEntity.jcmap; sourceTree = "<group>"; };
 		4914494912BE664C00D29E43 /* CoreData+JSON_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CoreData+JSON_Private.h"; path = "CoreData+JSON/_Private/CoreData+JSON_Private.h"; sourceTree = "<group>"; };
-		4914495D12BE693E00D29E43 /* NSManagedObjectContext+JSON_Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObjectContext+JSON_Tests.h"; path = "LogicTests/NSManagedObjectContext+JSON_Tests.h"; sourceTree = "<group>"; };
-		4914495E12BE693E00D29E43 /* NSManagedObjectContext+JSON_Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObjectContext+JSON_Tests.m"; path = "LogicTests/NSManagedObjectContext+JSON_Tests.m"; sourceTree = "<group>"; };
+		4914495D12BE693E00D29E43 /* NSManagedObjectContext+JSON_Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+JSON_Tests.h"; sourceTree = "<group>"; };
+		4914495E12BE693E00D29E43 /* NSManagedObjectContext+JSON_Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+JSON_Tests.m"; sourceTree = "<group>"; };
 		49144A8112BE7C5100D29E43 /* NSEntityDescription+JC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSEntityDescription+JC.h"; path = "CoreData+JSON/_Convenience/NSEntityDescription+JC.h"; sourceTree = "<group>"; };
 		49144A8212BE7C5100D29E43 /* NSEntityDescription+JC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSEntityDescription+JC.m"; path = "CoreData+JSON/_Convenience/NSEntityDescription+JC.m"; sourceTree = "<group>"; };
-		49450D5112BE811B00F0CE0F /* TestConvenienceCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestConvenienceCategories.h; path = LogicTests/TestConvenienceCategories.h; sourceTree = "<group>"; };
-		49450D5212BE811B00F0CE0F /* TestConvenienceCategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestConvenienceCategories.m; path = LogicTests/TestConvenienceCategories.m; sourceTree = "<group>"; };
+		49450D5112BE811B00F0CE0F /* TestConvenienceCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestConvenienceCategories.h; sourceTree = "<group>"; };
+		49450D5212BE811B00F0CE0F /* TestConvenienceCategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestConvenienceCategories.m; sourceTree = "<group>"; };
 		49450E2A12BEEE8800F0CE0F /* NSValueTransformer+JC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSValueTransformer+JC.h"; path = "CoreData+JSON/_Convenience/NSValueTransformer+JC.h"; sourceTree = "<group>"; };
 		49450E2B12BEEE8800F0CE0F /* NSValueTransformer+JC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSValueTransformer+JC.m"; path = "CoreData+JSON/_Convenience/NSValueTransformer+JC.m"; sourceTree = "<group>"; };
 		49450E6612BEF48D00F0CE0F /* TestToDateValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestToDateValueTransformer.h; path = LogicTests/_OtherTestObjects/TestToDateValueTransformer.h; sourceTree = "<group>"; };
@@ -146,11 +146,11 @@
 		49450F4012BFC39A00F0CE0F /* UnitTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "UnitTests-Info.plist"; sourceTree = "<group>"; };
 		4945B55212C39E0F0000EF85 /* NSString+JC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+JC.h"; path = "CoreData+JSON/_Convenience/NSString+JC.h"; sourceTree = "<group>"; };
 		4945B55312C39E0F0000EF85 /* NSString+JC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+JC.m"; path = "CoreData+JSON/_Convenience/NSString+JC.m"; sourceTree = "<group>"; };
-		4945B57E12C3C0690000EF85 /* testExpressionEntity.jcmap */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = testExpressionEntity.jcmap; sourceTree = "<group>"; };
+		4945B57E12C3C0690000EF85 /* testExpressionEntity.jcmap */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; name = testExpressionEntity.jcmap; path = LogicTests/_OtherTestObjects/testExpressionEntity.jcmap; sourceTree = "<group>"; };
 		49844F021438E34400069A7A /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		49844F031438E34400069A7A /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
-		49844F101438EF5300069A7A /* JCImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCImporter.h; sourceTree = "<group>"; };
-		49844F111438EF5300069A7A /* JCImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCImporter.m; sourceTree = "<group>"; };
+		49844F101438EF5300069A7A /* JCImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JCImporter.h; path = "CoreData+JSON/_Private/JCImporter.h"; sourceTree = "<group>"; };
+		49844F111438EF5300069A7A /* JCImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JCImporter.m; path = "CoreData+JSON/_Private/JCImporter.m"; sourceTree = "<group>"; };
 		49844F1B143919F800069A7A /* CoreData+JSON_PerformanceTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoreData+JSON_PerformanceTests.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49844F1D143919F800069A7A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		49844F20143919F800069A7A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -250,11 +250,11 @@
 				4914485C12BE3B0B00D29E43 /* Convenience */,
 				4914494812BE660D00D29E43 /* Private */,
 				491447A512BE1DC200D29E43 /* NSManagedObjectContext+JSON.h */,
-				491447A612BE1DC200D29E43 /* NSManagedObjectContext+JSON.m */,
+				491447A612BE1DC200D29E43 /* NSManagedObject+JSON.m */,
 				4914449C12BD3E3E00D29E43 /* NSManagedObject+JSON.h */,
 				4914449D12BD3E3E00D29E43 /* NSManagedObject+JSON.m */,
 			);
-			name = "CoreData+JSON";
+			path = "CoreData+JSON";
 			sourceTree = "<group>";
 		};
 		32C88DFF0371C24200C91783 /* Other Sources */ = {
@@ -280,7 +280,7 @@
 				4914491512BE613C00D29E43 /* NSManagedObject+JSON_Tests.h */,
 				4914491612BE613C00D29E43 /* NSManagedObject+JSON_Tests.m */,
 			);
-			name = LogicTests;
+			path = LogicTests;
 			sourceTree = "<group>";
 		};
 		4914457E12BD60A600D29E43 /* Test Objects */ = {
@@ -308,6 +308,7 @@
 				4945B55312C39E0F0000EF85 /* NSString+JC.m */,
 			);
 			name = Convenience;
+			path = "CoreData+JSON/_Convenience";
 			sourceTree = "<group>";
 		};
 		4914492212BE61F000D29E43 /* JCMappingModel Test Objects */ = {
@@ -325,6 +326,7 @@
 				49A16B9C12C95CDF009809B6 /* TestSubEntity.jcmap */,
 			);
 			name = "JCMappingModel Test Objects";
+			path = LogicTests/_JCMappingModelTestObjects;
 			sourceTree = "<group>";
 		};
 		4914492512BE622100D29E43 /* Other Test Objects */ = {
@@ -343,6 +345,7 @@
 				49450EF112BF01B000F0CE0F /* TestNumberToStringTransformer.m */,
 			);
 			name = "Other Test Objects";
+			path = LogicTests/_OtherTestObjects;
 			sourceTree = "<group>";
 		};
 		4914494812BE660D00D29E43 /* Private */ = {
@@ -358,6 +361,7 @@
 				49844F111438EF5300069A7A /* JCImporter.m */,
 			);
 			name = Private;
+			path = "CoreData+JSON/_Private";
 			sourceTree = "<group>";
 		};
 		49844F011438E34400069A7A /* JSONKit */ = {
@@ -601,7 +605,7 @@
 				4914449F12BD3E3E00D29E43 /* NSManagedObject+JSON.m in Sources */,
 				491444B712BD44B700D29E43 /* JCMappingModel.m in Sources */,
 				4914477012BE150700D29E43 /* JCMappingModelCache.m in Sources */,
-				491447A812BE1DC200D29E43 /* NSManagedObjectContext+JSON.m in Sources */,
+				491447A812BE1DC200D29E43 /* NSManagedObject+JSON.m in Sources */,
 				491447C112BE212A00D29E43 /* NSFetchRequest+JC.m in Sources */,
 				49144A8412BE7C5100D29E43 /* NSEntityDescription+JC.m in Sources */,
 				49450E2D12BEEE8800F0CE0F /* NSValueTransformer+JC.m in Sources */,
