@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="562" systemVersion="11B26" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Entity1">
+        <attribute name="field1" optional="YES" attributeType="Integer 32" defaultValueString="0"/>
+        <attribute name="field2" optional="YES" attributeType="Integer 32" defaultValueString="0"/>
+        <attribute name="guid" attributeType="String" indexed="YES"/>
+        <relationship name="relationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Entity2" inverseName="relationship" inverseEntity="Entity2"/>
+    </entity>
+    <entity name="Entity2">
+        <attribute name="field1" optional="YES" attributeType="Integer 32" defaultValueString="0"/>
+        <attribute name="field2" optional="YES" attributeType="Integer 32" defaultValueString="0"/>
+        <attribute name="field3" optional="YES" attributeType="Integer 32" defaultValueString="0"/>
+        <attribute name="guid" attributeType="String" indexed="YES"/>
+        <relationship name="relationship" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Entity1" inverseName="relationship" inverseEntity="Entity1"/>
+    </entity>
+    <elements>
+        <element name="Entity1" positionX="160" positionY="192" width="128" height="105"/>
+        <element name="Entity2" positionX="160" positionY="192" width="128" height="120"/>
+    </elements>
+</model>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UniqueField</key>
+	<string>guid</string>
+	<key>PropertiesMap</key>
+	<dict>
+		<key>field1</key>
+		<string>field1</string>
+		<key>field2</key>
+		<string>field2</string>
+		<key>relationship</key>
+		<string>relationship</string>
+		<key>guid</key>
+		<string>id</string>
+	</dict>
+</dict>
+</plist>
