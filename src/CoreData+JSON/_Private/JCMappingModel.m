@@ -109,12 +109,13 @@
 
 + (JCMappingModel *)mappingModelWithEntity:(NSEntityDescription *)entity bundle:(NSBundle *)bundleOrNil {
 	
-	JCMappingModel *mappingModel = [[JCMappingModelCache defaultCache] mappingModelForEntity:entity];
+    JCMappingModelCache *cache = [JCMappingModelCache defaultCache];
+	JCMappingModel *mappingModel = [cache mappingModelForEntity:entity];
 	
 	if (mappingModel == nil) {
 		
 		mappingModel = [[[JCMappingModel alloc] initWithEntity:entity bundle:bundleOrNil] autorelease];
-		[[JCMappingModelCache defaultCache] setMappingModel:mappingModel forEntity:entity];
+		[cache setMappingModel:mappingModel forEntity:entity];
 	}
 	
 	return mappingModel;

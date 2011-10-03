@@ -30,6 +30,7 @@
 
 #import "NSManagedObject+JSON.h"
 #import "NSManagedObjectContext+JSON.h"
+#import "JCImporter.h"
 
 void JCClearMapCache(void);
 
