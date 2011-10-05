@@ -46,9 +46,8 @@
 
 - (id)initWithEntity:(NSEntityDescription *)entity;
 - (id)initWithEntity:(NSEntityDescription *)entity bundle:(NSBundle *)bundleOrNil;
-+ (JCMappingModel *)mappingModelWithEntity:(NSEntityDescription *)entity;
-+ (JCMappingModel *)mappingModelWithEntity:(NSEntityDescription *)entity;
-+ (JCMappingModel *)mappingModelWithEntity:(NSEntityDescription *)entity bundle:(NSBundle *)bundleOrNil;
++ (JCMappingModel *)mappingModelForEntity:(NSEntityDescription *)entity;
++ (JCMappingModel *)mappingModelForEntity:(NSEntityDescription *)entity bundle:(NSBundle *)bundleOrNil;
 
 - (id)transformedValue:(id)value forPropertyName:(NSString *)propertyName;
 - (id)reverseTransformedValue:(id)value forPropertyName:(NSString *)propertyName;
