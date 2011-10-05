@@ -76,7 +76,7 @@
 		JCMappingModel *superMap = nil;
 		
 		if (superentity != nil)
-			superMap = [JCMappingModel mappingModelWithEntity:superentity bundle:bundleOrNil];
+			superMap = [JCMappingModel mappingModelForEntity:superentity bundle:bundleOrNil];
 		
 		NSString *uniqueField = [map objectForKey:kUniqueFieldMapKey];
 		if (uniqueField == nil && superMap != nil)
@@ -102,12 +102,12 @@
 	return self;
 }
 
-+ (JCMappingModel *)mappingModelWithEntity:(NSEntityDescription *)entity {
++ (JCMappingModel *)mappingModelForEntity:(NSEntityDescription *)entity {
 	
-	return [JCMappingModel mappingModelWithEntity:entity bundle:nil];
+	return [JCMappingModel mappingModelForEntity:entity bundle:nil];
 }
 
-+ (JCMappingModel *)mappingModelWithEntity:(NSEntityDescription *)entity bundle:(NSBundle *)bundleOrNil {
++ (JCMappingModel *)mappingModelForEntity:(NSEntityDescription *)entity bundle:(NSBundle *)bundleOrNil {
 	
     JCMappingModelCache *cache = [JCMappingModelCache defaultCache];
 	JCMappingModel *mappingModel = [cache mappingModelForEntity:entity];
