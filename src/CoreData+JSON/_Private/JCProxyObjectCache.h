@@ -1,8 +1,8 @@
 //
-//  JCMappingModelCacheTests.m
+//  JCMManagedCache.h
 //  CoreData+JSON
 //
-//	Copyright (c) 2010, emdentec (Elliot Neal)
+//	Copyright (c) 2011, emdentec (Elliot Neal)
 //	All rights reserved.
 //
 //	Redistribution and use in source and binary forms, with or without
@@ -28,41 +28,39 @@
 //	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "JCMappingModelCacheTests.h"
-#import "JCMappingModel.h"
-#import "JCMappingModelCache.h"
-#import "FauxEntityDescription.h"
-#import "CoreData+JSON.h"
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
-@implementation JCMappingModelCacheTests
+@class JCProxyObject;
 
-- (void)setUp {
-	
-	entity = [[FauxEntityDescription entityDescriptionWithName:@"TestValidMappingModel"] retain];
-	NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-	
-	mappingModel = [[JCMappingModel mappingModelForEntity:entity bundle:bundle] retain];
-}
+@interface JCProxyObjectCache : NSObject <NSFastEnumeration>
 
-- (void)tearDown {
-	
-	[entity release];
-	entity = nil;
-	
-	[mappingModel release];
-	mappingModel = nil;
-}
 
-- (void)testObjectCaching {
-	
-	STAssertEqualObjects(mappingModel, [[JCMappingModelCache defaultCache] mappingModelForEntity:entity], @"Mapping model cache should store mapping model after using mappingModelWithEntity:");
-}
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain) NSEntityDescription *entity;
 
-- (void)testClearingCache {
-	
-	JCClearMapCache();
-	
-	STAssertNil([[JCMappingModelCache defaultCache] mappingModelForEntity:entity], @"Mapping model cache should clear all mapping models after using clearCache");
-}
+
+- (id)initWithEntity:(NSEntityDescription *)entity managedObjectContext:(NSManagedObjectContext *)managedObjectContext bundle:(NSBundle *)bundleOrNil;
+
+
+- (JCProxyObject *)proxyObjectForUniqueFieldValue:(id)uniqueFieldValue;
+- (void)addProxyObject:(JCProxyObject *)managedObject;
+- (void)addProxyObjectsFromJSONObjects:(NSArray *)jsonObjects superUniqueFieldValue:(id)superUniqueFieldValue;
+- (void)fetchManagedObjects;
+
+- (id)uniqueFieldValueForJSONObject:(id)jsonObject superUniqueFieldValue:(id)superUniqueFieldValue;
+
+
+- (NSDictionary *)generateRelationshipCaches;
+
+
+- (NSUInteger)count;
+- (JCProxyObject *)proxyObjectAtIndex:(NSUInteger)index;
+
+- (JCProxyObjectCache *)subcacheWithRange:(NSRange)range;
+
+- (NSArray *)uniqueFieldValues;
+- (NSArray *)jsonObjects;
+- (NSArray *)managedObjects;
 
 @end

@@ -33,6 +33,8 @@
 #import "ConvenienceCategories.h"
 #import "JSONKit.h"
 
+#import "JCImporter.h"
+
 @interface NSManagedObject (JSONPrivate)
 
 - (void)setAttributesFromDictionary:(NSDictionary *)dictionary mappingModel:(JCMappingModel *)mappingModel superUniqueFieldValue:(id)superUniqueFieldValue;
@@ -85,7 +87,12 @@
 
 + (id)managedObjectWithDictionary:(NSDictionary *)values entity:(NSEntityDescription *)entity managedObjectContext:(NSManagedObjectContext *)managedObjectContext superUniqueFieldValue:(id)superUniqueFieldValue bundle:(NSBundle *)bundleOrNil {
 	
-	JCMappingModel *mappingModel = [JCMappingModel mappingModelWithEntity:entity bundle:bundleOrNil];
+	JCImporter *importer = [[JCImporter alloc] initWithManagedObjectContext:managedObjectContext bundle:bundleOrNil];
+    id result = [importer managedObjectFromDictionary:values forEntity:entity];
+    [importer release];
+    return result;
+    
+    JCMappingModel *mappingModel = [JCMappingModel mappingModelForEntity:entity bundle:bundleOrNil];
 	NSString *coreDataUniqueFieldName = mappingModel.uniqueField;
 	NSDictionary *propertiesMap = mappingModel.propertiesMap;
 	NSString *mappedUniqueFieldName = [propertiesMap objectForKey:coreDataUniqueFieldName];
@@ -197,7 +204,7 @@
 	}
 	else if ([value isKindOfClass:[NSNumber class]] || [value isKindOfClass:[NSString class]]) {
 		
-		JCMappingModel *mappingModel = [JCMappingModel mappingModelWithEntity:entity bundle:bundleOrNil];
+		JCMappingModel *mappingModel = [JCMappingModel mappingModelForEntity:entity bundle:bundleOrNil];
 		NSString *uniqueFieldName = mappingModel.uniqueField;
 		id transformedValue = [mappingModel transformedValue:value forPropertyName:uniqueFieldName];
 		

@@ -2,19 +2,44 @@
 //  JCImporter.m
 //  CoreData+JSON
 //
-//  Created by Elliot Neal on 02/10/2011.
-//  Copyright 2011 emdentec. All rights reserved.
+//	Copyright (c) 2011, emdentec (Elliot Neal)
+//	All rights reserved.
+//
+//	Redistribution and use in source and binary forms, with or without
+//	modification, are permitted provided that the following conditions are met:
+//		* Redistributions of source code must retain the above copyright
+//		  notice, this list of conditions and the following disclaimer.
+//		* Redistributions in binary form must reproduce the above copyright
+//		  notice, this list of conditions and the following disclaimer in the
+//		  documentation and/or other materials provided with the distribution.
+//		* Neither the name of emdentec nor the
+//		  names of its contributors may be used to endorse or promote products
+//		  derived from this software without specific prior written permission.
+//
+//	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+//	ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+//	WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+//	DISCLAIMED. IN NO EVENT SHALL COPYRIGHT HOLDERS OR CONTRIBUTORS BE LIABLE FOR ANY
+//	DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+//	(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+//	LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+//	ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+//	(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+//	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
 #import "JCImporter.h"
 
 #import "JSONKit.h"
-
+#import "ConvenienceCategories.h"
 #import "JCMappingModel.h"
 #import "JCMappingModelCache.h"
-
+#import "JCProxyObject.h"
+#import "JCProxyObjectCache.h"
 
 #import "NSManagedObject+JSON.h"
+
+#import "CoreData+JSON.h"
 
 @interface JCImporter () {
     
@@ -22,10 +47,9 @@
     NSBundle *_bundle;
 }
 
-- (NSArray *)managedObjectsFromJSONObject:(id)jsonObject forEntity:(NSEntityDescription *)entity withBatchSize:(NSUInteger)batchSize;
+- (NSArray *)managedObjectsFromJSONObject:(id)jsonObject forEntity:(NSEntityDescription *)entity;
 
-- (NSArray *)fetchObjectsInArray:(NSArray *)jsonObjects forEntity:(NSEntityDescription *)entity withMappedUniqueFieldName:(NSString *)mappedUniqueFieldName;
-- (NSArray *)fetchManagedObjectsForEntity:(NSEntityDescription *)entity withUniqueFieldValues:(NSArray *)uniqueFieldValues;
+- (NSArray *)managedObjectsFromCache:(JCProxyObjectCache *)objectCache;
 
 
 @property (nonatomic, readonly) NSManagedObjectContext *managedObjectContext;
@@ -37,6 +61,9 @@
 @implementation JCImporter
 
 @synthesize managedObjectContext = _managedObjectContext;
+@synthesize importBatchSize = _importBatchSize;
+@synthesize saveBatchSize = _saveBatchSize;
+
 @synthesize bundle = _bundle;
 
 
@@ -47,6 +74,8 @@
     self = [super init];
     if (self) {
         _managedObjectContext = [managedObjectContext retain];
+        _importBatchSize = 0;
+        _saveBatchSize = 0;
         _bundle = [bundleOrNil retain];
     }
     return self;
@@ -63,101 +92,126 @@
 
 #pragma mark - Object Importing Public
 
-- (NSArray *)managedObjectsFromJSONData:(NSData *)jsonData forEntity:(NSEntityDescription *)entity withBatchSize:(NSUInteger)batchSize {
+- (NSArray *)managedObjectsFromJSONData:(NSData *)jsonData forEntity:(NSEntityDescription *)entity {
     
     id jsonObject = [jsonData objectFromJSONData];
     
-    return [self managedObjectsFromJSONObject:jsonObject forEntity:entity withBatchSize:batchSize];
+    return [self managedObjectsFromJSONObject:jsonObject forEntity:entity];
 }
 
-- (NSArray *)managedObjectsFromJSONString:(NSString *)jsonString forEntity:(NSEntityDescription *)entity withBatchSize:(NSUInteger)batchSize {
+- (NSArray *)managedObjectsFromJSONString:(NSString *)jsonString forEntity:(NSEntityDescription *)entity {
 
     id jsonObject = [jsonString objectFromJSONString];
     
-    return [self managedObjectsFromJSONObject:jsonObject forEntity:entity withBatchSize:batchSize];
+    return [self managedObjectsFromJSONObject:jsonObject forEntity:entity];
 }
 
-- (NSArray *)managedObjectsFromArray:(NSArray *)jsonObjects forEntity:(NSEntityDescription *)entity withBatchSize:(NSUInteger)batchSize {
+- (NSArray *)managedObjectsFromArray:(NSArray *)jsonObjects forEntity:(NSEntityDescription *)entity {
     
-    NSUInteger objectCount = [jsonObjects count];
-    BOOL useBatching = batchSize > 0;
+    JCProxyObjectCache *cache = [[JCProxyObjectCache alloc] initWithEntity:entity managedObjectContext:self.managedObjectContext bundle:self.bundle];
+    [cache addProxyObjectsFromJSONObjects:jsonObjects superUniqueFieldValue:nil];
     
-    NSUInteger numberOfBatches = (useBatching ? ceilf(objectCount / batchSize) : 1);
+    NSArray *results = [self managedObjectsFromCache:cache];
+    [cache release];
+    
+    return results;
+}
+
+- (id)managedObjectFromDictionary:(NSDictionary *)jsonObject forEntity:(NSEntityDescription *)entity {
+    
+    NSArray *results = [self managedObjectsFromArray:[NSArray arrayWithObject:jsonObject] forEntity:entity];
+    if ([results count] > 0)
+        return [results objectAtIndex:0];
+    
+    return nil;
+}
+
+
+#pragma mark - Object Importing Private
+
+- (NSArray *)managedObjectsFromJSONObject:(id)jsonObject forEntity:(NSEntityDescription *)entity {
+    
+    NSArray *jsonObjects = nil;
+    
+    if ([jsonObject isKindOfClass:[NSDictionary class]])
+        jsonObjects = [NSArray arrayWithObject:jsonObject];
+    else
+        jsonObjects = jsonObject;
+    
+    return [self managedObjectsFromArray:jsonObjects forEntity:entity];
+}
+
+- (NSArray *)managedObjectsFromCache:(JCProxyObjectCache *)objectCache {
+    
+    NSMutableArray *managedObjects = [[NSMutableArray alloc] initWithCapacity:[objectCache count]];
+    
+    NSUInteger importBatchSize = self.importBatchSize;
+    NSUInteger saveBatchSize = self.saveBatchSize;
+    NSUInteger objectCount = [objectCache count];
+    BOOL useImportBatching = importBatchSize > 0;
+    BOOL useSaveBatching = (useImportBatching && (importBatchSize != saveBatchSize));
+    
+    NSUInteger numberOfBatches = (useImportBatching ? ceilf(objectCount / importBatchSize) : 1);
     NSMutableArray *batches = [[NSMutableArray alloc] initWithCapacity:numberOfBatches];
     
     for (int i = 0; i < numberOfBatches; i++) {
         
         NSRange batchRange;
         
-        if (i == numberOfBatches)
-            batchRange = NSMakeRange(i * batchSize, objectCount % batchSize);
+        if ((i == (numberOfBatches - 1)) && (objectCount % importBatchSize != 0))
+            batchRange = NSMakeRange(i * importBatchSize, objectCount % importBatchSize);
         else
-            batchRange = NSMakeRange(i * batchSize, batchSize);
+            batchRange = NSMakeRange(i * importBatchSize, importBatchSize);
         
-        NSArray *batchObjects = [jsonObjects subarrayWithRange:batchRange];
-        [batches addObject:batchObjects];
+        JCProxyObjectCache *batchCache = [objectCache subcacheWithRange:batchRange];
+        [batches addObject:batchCache];
     }
-    
-    JCMappingModel *mappingModel = [JCMappingModel mappingModelWithEntity:entity bundle:self.bundle];
-    NSString *uniqueFieldName = [mappingModel uniqueField];
-    NSString *mappedUniqueFieldName = [[mappingModel propertiesMap] objectForKey:uniqueFieldName];
-    
-    NSMutableArray *results = [[NSMutableArray alloc] initWithCapacity:[jsonObjects count]];
-    
-    for (NSArray *batchObjects in batches) {
+
+    //start
+    for (int i = 0; i < [batches count]; i++) {
         
         NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
         
-        NSMutableArray *batchResults = [[NSMutableArray alloc] initWithCapacity:[batchObjects count]];
+        JCProxyObjectCache *batchCache = [batches objectAtIndex:i];
         
-        // we are going to fetch all the managed objects that already exist using the unique field value
-        // the array of fetched objects & array of json objects will be ordered by unique field value
-        // this way we can iterate through the json objects and check if there is a corresponding fetched object
-        // and when there isn't we will generate a new managed object
-        NSArray *sortedBatchObjects = [batchObjects sortedArrayUsingComparator:^NSComparisonResult (id obj1, id obj2) {
-            
-            id unique1 = [obj1 objectForKey:mappedUniqueFieldName];
-            id unique2 = [obj2 objectForKey:mappedUniqueFieldName];
-            
-            return [unique1 compare:unique2];
-        }];
-        NSArray *fetchedObjects = [self fetchObjectsInArray:batchObjects forEntity:entity withMappedUniqueFieldName:mappedUniqueFieldName];
+//        if (JC_LOGGING_ENABLED)
+//            NSLog(@"Starting batch %d of %d for entity %@", i, numberOfBatches, [[batchCache entity] name]);
         
-        // this iterations picks out missing objects by stepping through each array
-        // 1. get the next json object & managed object
-        // 2. check if the unique field values match
-        // 3. if they do, increment both indexes
-        // 4a. if they don't, create a new managed object and DO NOT increment the fetched object index
-        // 4b. get the next json object and check if it matches the last fetched object
-        NSUInteger jsonObjectIndex = 0;
-        NSUInteger fetchedObjectIndex = 0;
-        for (NSDictionary *jsonObject in sortedBatchObjects) {
+        //perform the fetch
+        [batchCache fetchManagedObjects];
+        
+        NSDictionary *relationshipCaches = [batchCache generateRelationshipCaches];
+
+        for (int j = 0; j < [batchCache count]; j++) {
             
-            id jsonUniqueFieldValue = [jsonObject objectForKey:mappedUniqueFieldName];
+//            if (JC_LOGGING_ENABLED)
+//                NSLog(@"Starting import of object %d of %d, in batch %d of %d for entity %@", j, [batchCache count], i, numberOfBatches, [[batchCache entity] name]);
             
-            NSManagedObject *managedObject = [fetchedObjects objectAtIndex:fetchedObjectIndex];
-            id managedObjectUniqueFieldValue = [managedObject valueForKey:uniqueFieldName];
+            JCProxyObject *proxyObject = [batchCache proxyObjectAtIndex:j];
             
-            if ([jsonUniqueFieldValue isEqual:managedObjectUniqueFieldValue]) {
-                //update the object
-                fetchedObjectIndex++;
-            }
-            else {
-                //insert the object
+            [proxyObject updateAttributes];
+            [proxyObject updateInverseRelationships];
+            
+            NSEntityDescription *entity = [proxyObject entity];
+            NSArray *relationships = [[entity relationshipsByName] allKeys];
+            
+            for (NSString *relationshipName in relationships) {
+                
+                JCProxyObjectCache *relationshipCache = [relationshipCaches objectForKey:relationshipName];
+                [proxyObject updateRelationship:relationshipName fromManagedObjectCache:relationshipCache];
             }
             
-            //add the managed object to the results
-            [batchResults addObject:managedObject];
+            [managedObjects addObject:[proxyObject managedObject]];
             
-            jsonObjectIndex++;
+            if (i > 0 && useSaveBatching && (i % saveBatchSize == 0)) {
+                [self.managedObjectContext save:nil];
+            }
         }
         
+        for (JCProxyObjectCache *relationshipCache in [relationshipCaches allValues])
+            [self managedObjectsFromCache:relationshipCache];
         
-        [results addObjectsFromArray:batchResults];
-        [batchResults release];
-        
-        
-        if (useBatching) {  // only save the context if batching is enabled
+        if (useImportBatching) {
             
             [self.managedObjectContext save:nil];
             [self.managedObjectContext reset];
@@ -168,64 +222,7 @@
     
     [batches release];
     
-    return [results autorelease];
-}
-
-- (id)managedObjectFromDictionary:(NSDictionary *)jsonObject forEntity:(NSEntityDescription *)entity withBatchSize:(NSUInteger)batchSize {
-    
-    return [NSManagedObject managedObjectWithDictionary:jsonObject entity:entity managedObjectContext:self.managedObjectContext];
-}
-
-
-#pragma mark - Object Importing Private
-
-- (NSArray *)managedObjectsFromJSONObject:(id)jsonObject forEntity:(NSEntityDescription *)entity withBatchSize:(NSUInteger)batchSize {
-    
-    if ([jsonObject isKindOfClass:[NSDictionary class]])
-        return [NSArray arrayWithObject:[self managedObjectFromDictionary:jsonObject forEntity:entity withBatchSize:batchSize]];
-    
-    return [self managedObjectsFromArray:jsonObject forEntity:entity withBatchSize:batchSize];
-}
-
-
-#pragma mark - Object Fetching
-
-- (NSArray *)fetchObjectsInArray:(NSArray *)jsonObjects forEntity:(NSEntityDescription *)entity withMappedUniqueFieldName:(NSString *)mappedUniqueFieldName {
-    
-    NSMutableArray *uniqueFieldValues = [[NSMutableArray alloc] initWithCapacity:[jsonObjects count]];
-    
-    for (NSDictionary *jsonObject in jsonObjects)
-        [uniqueFieldValues addObject:[jsonObject objectForKey:mappedUniqueFieldName]];
-    
-    NSArray *managedObjects = [self fetchManagedObjectsForEntity:entity withUniqueFieldValues:uniqueFieldValues];
-    [uniqueFieldValues release];
-    
-    return managedObjects;
-}
-
-- (NSArray *)fetchManagedObjectsForEntity:(NSEntityDescription *)entity withUniqueFieldValues:(NSArray *)uniqueFieldValues {
-    
-    JCMappingModel *mappingModel = [JCMappingModel mappingModelWithEntity:entity bundle:self.bundle];
-    NSString *uniqueFieldName = [mappingModel uniqueField];
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setReturnsObjectsAsFaults:NO];
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(%K IN %@)", uniqueFieldName, uniqueFieldValues];
-    [fetchRequest setPredicate:predicate];
-    
-    NSMutableArray *results = [[self.managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
-    [fetchRequest release];
-    
-    [results sortUsingComparator:^NSComparisonResult (id obj1, id obj2) {
-        
-        id unique1 = [obj1 valueForKey:uniqueFieldName];
-        id unique2 = [obj2 valueForKey:uniqueFieldName];
-        
-        return [unique1 compare:unique2];
-    }];
-    
-    return [results autorelease];
+    return [managedObjects autorelease];
 }
 
 @end

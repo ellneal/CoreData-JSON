@@ -19,6 +19,8 @@
 		4914489F12BE43DC00D29E43 /* CoreData+JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 4914489E12BE43DC00D29E43 /* CoreData+JSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4914491712BE613C00D29E43 /* NSManagedObject+JSON_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4914491612BE613C00D29E43 /* NSManagedObject+JSON_Tests.m */; };
 		4914495F12BE693E00D29E43 /* NSManagedObjectContext+JSON_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4914495E12BE693E00D29E43 /* NSManagedObjectContext+JSON_Tests.m */; };
+		492DAEB9143C6AE800BBE1BE /* JCProxyObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 492DAEB7143C6AE800BBE1BE /* JCProxyObject.h */; };
+		492DAEBA143C6AE800BBE1BE /* JCProxyObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 492DAEB8143C6AE800BBE1BE /* JCProxyObject.m */; };
 		49450D5312BE811B00F0CE0F /* TestConvenienceCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 49450D5212BE811B00F0CE0F /* TestConvenienceCategories.m */; };
 		49844F041438E34400069A7A /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 49844F021438E34400069A7A /* JSONKit.h */; };
 		49844F051438E34400069A7A /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 49844F031438E34400069A7A /* JSONKit.m */; };
@@ -71,6 +73,8 @@
 		49FC92101439454B002C85AD /* testRelatedEntity.jcmap in Resources */ = {isa = PBXBuildFile; fileRef = 49FC91FE1439454B002C85AD /* testRelatedEntity.jcmap */; };
 		49FC92111439454B002C85AD /* TestToDateValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FC92001439454B002C85AD /* TestToDateValueTransformer.m */; };
 		49FC92121439454B002C85AD /* testTransformedUniqueFieldEntity.jcmap in Resources */ = {isa = PBXBuildFile; fileRef = 49FC92011439454B002C85AD /* testTransformedUniqueFieldEntity.jcmap */; };
+		49FC921F1439ECC3002C85AD /* JCProxyObjectCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 49FC921D1439ECC3002C85AD /* JCProxyObjectCache.h */; };
+		49FC92201439ECC3002C85AD /* JCProxyObjectCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FC921E1439ECC3002C85AD /* JCProxyObjectCache.m */; };
 		AA747D9F0F9514B9006C5449 /* CoreData_JSON_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* CoreData_JSON_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -108,6 +112,8 @@
 		4914491612BE613C00D29E43 /* NSManagedObject+JSON_Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+JSON_Tests.m"; sourceTree = "<group>"; };
 		4914495D12BE693E00D29E43 /* NSManagedObjectContext+JSON_Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+JSON_Tests.h"; sourceTree = "<group>"; };
 		4914495E12BE693E00D29E43 /* NSManagedObjectContext+JSON_Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+JSON_Tests.m"; sourceTree = "<group>"; };
+		492DAEB7143C6AE800BBE1BE /* JCProxyObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCProxyObject.h; sourceTree = "<group>"; };
+		492DAEB8143C6AE800BBE1BE /* JCProxyObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCProxyObject.m; sourceTree = "<group>"; };
 		49450D5112BE811B00F0CE0F /* TestConvenienceCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestConvenienceCategories.h; sourceTree = "<group>"; };
 		49450D5212BE811B00F0CE0F /* TestConvenienceCategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestConvenienceCategories.m; sourceTree = "<group>"; };
 		49450F4012BFC39A00F0CE0F /* UnitTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "UnitTests-Info.plist"; sourceTree = "<group>"; };
@@ -148,25 +154,27 @@
 		49FC91AB1439450D002C85AD /* JCMappingModelCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCMappingModelCache.m; sourceTree = "<group>"; };
 		49FC91EC1439454B002C85AD /* FauxEntityDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FauxEntityDescription.h; sourceTree = "<group>"; };
 		49FC91ED1439454B002C85AD /* FauxEntityDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FauxEntityDescription.m; sourceTree = "<group>"; };
-		49FC91EE1439454B002C85AD /* TestBlankPropertiesMap.jcmap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestBlankPropertiesMap.jcmap; sourceTree = "<group>"; };
-		49FC91EF1439454B002C85AD /* TestBlankUniqueField.jcmap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestBlankUniqueField.jcmap; sourceTree = "<group>"; };
-		49FC91F01439454B002C85AD /* TestIncorrectUniqueField.jcmap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestIncorrectUniqueField.jcmap; sourceTree = "<group>"; };
-		49FC91F11439454B002C85AD /* TestMissingUniqueField.jcmap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestMissingUniqueField.jcmap; sourceTree = "<group>"; };
-		49FC91F21439454B002C85AD /* TestNilPropertiesMap.jcmap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestNilPropertiesMap.jcmap; sourceTree = "<group>"; };
-		49FC91F31439454B002C85AD /* TestSubEntity.jcmap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TestSubEntity.jcmap; sourceTree = "<group>"; };
-		49FC91F41439454B002C85AD /* TestSuperEntity.jcmap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TestSuperEntity.jcmap; sourceTree = "<group>"; };
-		49FC91F51439454B002C85AD /* TestValidMappingModel.jcmap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestValidMappingModel.jcmap; sourceTree = "<group>"; };
+		49FC91EE1439454B002C85AD /* TestBlankPropertiesMap.jcmap */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = TestBlankPropertiesMap.jcmap; sourceTree = "<group>"; };
+		49FC91EF1439454B002C85AD /* TestBlankUniqueField.jcmap */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = TestBlankUniqueField.jcmap; sourceTree = "<group>"; };
+		49FC91F01439454B002C85AD /* TestIncorrectUniqueField.jcmap */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = TestIncorrectUniqueField.jcmap; sourceTree = "<group>"; };
+		49FC91F11439454B002C85AD /* TestMissingUniqueField.jcmap */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = TestMissingUniqueField.jcmap; sourceTree = "<group>"; };
+		49FC91F21439454B002C85AD /* TestNilPropertiesMap.jcmap */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = TestNilPropertiesMap.jcmap; sourceTree = "<group>"; };
+		49FC91F31439454B002C85AD /* TestSubEntity.jcmap */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = TestSubEntity.jcmap; sourceTree = "<group>"; };
+		49FC91F41439454B002C85AD /* TestSuperEntity.jcmap */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = TestSuperEntity.jcmap; sourceTree = "<group>"; };
+		49FC91F51439454B002C85AD /* TestValidMappingModel.jcmap */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = TestValidMappingModel.jcmap; sourceTree = "<group>"; };
 		49FC91F71439454B002C85AD /* NSManagedObjectContext+UnitTesting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+UnitTesting.h"; sourceTree = "<group>"; };
 		49FC91F81439454B002C85AD /* NSManagedObjectContext+UnitTesting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+UnitTesting.m"; sourceTree = "<group>"; };
-		49FC91F91439454B002C85AD /* testEntity.jcmap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testEntity.jcmap; sourceTree = "<group>"; };
-		49FC91FA1439454B002C85AD /* testExpressionEntity.jcmap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testExpressionEntity.jcmap; sourceTree = "<group>"; };
+		49FC91F91439454B002C85AD /* testEntity.jcmap */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = testEntity.jcmap; sourceTree = "<group>"; };
+		49FC91FA1439454B002C85AD /* testExpressionEntity.jcmap */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = testExpressionEntity.jcmap; sourceTree = "<group>"; };
 		49FC91FB1439454B002C85AD /* TestModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TestModel.xcdatamodel; sourceTree = "<group>"; };
 		49FC91FC1439454B002C85AD /* TestNumberToStringTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestNumberToStringTransformer.h; sourceTree = "<group>"; };
 		49FC91FD1439454B002C85AD /* TestNumberToStringTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestNumberToStringTransformer.m; sourceTree = "<group>"; };
-		49FC91FE1439454B002C85AD /* testRelatedEntity.jcmap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testRelatedEntity.jcmap; sourceTree = "<group>"; };
+		49FC91FE1439454B002C85AD /* testRelatedEntity.jcmap */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = testRelatedEntity.jcmap; sourceTree = "<group>"; };
 		49FC91FF1439454B002C85AD /* TestToDateValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestToDateValueTransformer.h; sourceTree = "<group>"; };
 		49FC92001439454B002C85AD /* TestToDateValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestToDateValueTransformer.m; sourceTree = "<group>"; };
-		49FC92011439454B002C85AD /* testTransformedUniqueFieldEntity.jcmap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testTransformedUniqueFieldEntity.jcmap; sourceTree = "<group>"; };
+		49FC92011439454B002C85AD /* testTransformedUniqueFieldEntity.jcmap */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = testTransformedUniqueFieldEntity.jcmap; sourceTree = "<group>"; };
+		49FC921D1439ECC3002C85AD /* JCProxyObjectCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCProxyObjectCache.h; sourceTree = "<group>"; };
+		49FC921E1439ECC3002C85AD /* JCProxyObjectCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCProxyObjectCache.m; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* CoreData_JSON_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreData_JSON_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libCoreData_JSON.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCoreData_JSON.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -356,6 +364,10 @@
 				49FC91A91439450D002C85AD /* JCMappingModel.m */,
 				49FC91AA1439450D002C85AD /* JCMappingModelCache.h */,
 				49FC91AB1439450D002C85AD /* JCMappingModelCache.m */,
+				492DAEB7143C6AE800BBE1BE /* JCProxyObject.h */,
+				492DAEB8143C6AE800BBE1BE /* JCProxyObject.m */,
+				49FC921D1439ECC3002C85AD /* JCProxyObjectCache.h */,
+				49FC921E1439ECC3002C85AD /* JCProxyObjectCache.m */,
 			);
 			name = Private;
 			path = _Private;
@@ -420,6 +432,8 @@
 				49FC91B91439450D002C85AD /* JCImporter.h in Headers */,
 				49FC91BB1439450D002C85AD /* JCMappingModel.h in Headers */,
 				49FC91BD1439450D002C85AD /* JCMappingModelCache.h in Headers */,
+				49FC921F1439ECC3002C85AD /* JCProxyObjectCache.h in Headers */,
+				492DAEB9143C6AE800BBE1BE /* JCProxyObject.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -613,6 +627,8 @@
 				49FC91BA1439450D002C85AD /* JCImporter.m in Sources */,
 				49FC91BC1439450D002C85AD /* JCMappingModel.m in Sources */,
 				49FC91BE1439450D002C85AD /* JCMappingModelCache.m in Sources */,
+				49FC92201439ECC3002C85AD /* JCProxyObjectCache.m in Sources */,
+				492DAEBA143C6AE800BBE1BE /* JCProxyObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -34,3 +34,5 @@
 
 void JCClearMapCache(void);
 
+
+#define JC_LOGGING_ENABLED 1
