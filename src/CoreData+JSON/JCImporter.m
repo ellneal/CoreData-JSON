@@ -113,7 +113,7 @@
     return [self managedObjectsFromArray:jsonObjects forEntity:entity superUniqueFieldValue:nil];
 }
 
-- (id)managedObjectFromDictionary:(NSDictionary *)jsonObject forEntity:(NSEntityDescription *)entity {
+- (NSManagedObject *)managedObjectFromDictionary:(NSDictionary *)jsonObject forEntity:(NSEntityDescription *)entity {
     
     NSArray *results = [self managedObjectsFromArray:[NSArray arrayWithObject:jsonObject] forEntity:entity];
     if ([results count] > 0)

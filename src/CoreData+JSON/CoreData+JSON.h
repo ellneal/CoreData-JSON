@@ -29,10 +29,7 @@
 //
 
 #import "NSManagedObject+JSON.h"
-#import "NSManagedObjectContext+JSON.h"
 #import "JCImporter.h"
 
 void JCClearMapCache(void);
 
-
-#define JC_LOGGING_ENABLED 1
