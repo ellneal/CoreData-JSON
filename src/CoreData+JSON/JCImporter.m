@@ -49,7 +49,7 @@
 
 - (NSArray *)managedObjectsFromJSONObject:(id)jsonObject forEntity:(NSEntityDescription *)entity;
 
-- (NSArray *)managedObjectsFromCache:(JCProxyObjectCache *)objectCache;
+- (NSArray *)managedObjectIDsFromCache:(JCProxyObjectCache *)objectCache;
 
 
 @property (nonatomic, readonly) NSManagedObjectContext *managedObjectContext;
@@ -111,10 +111,14 @@
     JCProxyObjectCache *cache = [[JCProxyObjectCache alloc] initWithEntity:entity managedObjectContext:self.managedObjectContext bundle:self.bundle];
     [cache addProxyObjectsFromJSONObjects:jsonObjects superUniqueFieldValue:nil];
     
-    NSArray *results = [self managedObjectsFromCache:cache];
+    NSArray *resultIDs = [self managedObjectIDsFromCache:cache];
     [cache release];
     
-    return results;
+    NSMutableArray *results = [[NSMutableArray alloc] initWithCapacity:[resultIDs count]];
+    for (NSManagedObjectID *managedObjectID in resultIDs)
+        [results addObject:[self.managedObjectContext objectWithID:managedObjectID]];
+    
+    return [results autorelease];
 }
 
 - (id)managedObjectFromDictionary:(NSDictionary *)jsonObject forEntity:(NSEntityDescription *)entity {
@@ -141,7 +145,7 @@
     return [self managedObjectsFromArray:jsonObjects forEntity:entity];
 }
 
-- (NSArray *)managedObjectsFromCache:(JCProxyObjectCache *)objectCache {
+- (NSArray *)managedObjectIDsFromCache:(JCProxyObjectCache *)objectCache {
     
     NSMutableArray *managedObjects = [[NSMutableArray alloc] initWithCapacity:[objectCache count]];
     
@@ -150,6 +154,9 @@
     NSUInteger objectCount = [objectCache count];
     BOOL useImportBatching = importBatchSize > 0;
     BOOL useSaveBatching = (useImportBatching && (importBatchSize != saveBatchSize));
+    
+    if (!useImportBatching)
+        importBatchSize = [objectCache count];
     
     NSUInteger numberOfBatches = (useImportBatching ? ceilf(objectCount / importBatchSize) : 1);
     NSMutableArray *batches = [[NSMutableArray alloc] initWithCapacity:numberOfBatches];
@@ -201,7 +208,7 @@
                 [proxyObject updateRelationship:relationshipName fromManagedObjectCache:relationshipCache];
             }
             
-            [managedObjects addObject:[proxyObject managedObject]];
+            [managedObjects addObject:[[proxyObject managedObject] objectID]];
             
             if (i > 0 && useSaveBatching && (i % saveBatchSize == 0)) {
                 [self.managedObjectContext save:nil];
@@ -209,7 +216,7 @@
         }
         
         for (JCProxyObjectCache *relationshipCache in [relationshipCaches allValues])
-            [self managedObjectsFromCache:relationshipCache];
+            [self managedObjectIDsFromCache:relationshipCache];
         
         if (useImportBatching) {
             

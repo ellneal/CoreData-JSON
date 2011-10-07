@@ -167,7 +167,7 @@
         
         if ([fetchedObjects count] > fetchedObjectIndex) {
             
-            [fetchedObjects objectAtIndex:fetchedObjectIndex];
+            managedObject = [fetchedObjects objectAtIndex:fetchedObjectIndex];
             id managedObjectUniqueFieldValue = [managedObject valueForKey:uniqueFieldName];
             
             if ([uniqueFieldValue isEqual:managedObjectUniqueFieldValue]) {
@@ -248,8 +248,13 @@
         
         for (JCProxyObject *proxyObject in _proxyObjects) {
             
+            id jsonObject = [proxyObject jsonObject];
+            
+            if (![jsonObject isKindOfClass:[NSDictionary class]])
+                continue;
+            
             id superUniqueFieldValue = [proxyObject uniqueFieldValue];
-            id relationshipValue = [[proxyObject jsonObject] objectForKey:mappedRelationshipName];
+            id relationshipValue = [jsonObject objectForKey:mappedRelationshipName];
             
             if (relationshipValue == nil)
                 continue;

@@ -194,8 +194,16 @@
             id jsonObject = newValue;
             id uniqueFieldValue = [managedObjectCache uniqueFieldValueForJSONObject:jsonObject superUniqueFieldValue:[self uniqueFieldValue]];
             
-            NSManagedObject *managedObject = [[managedObjectCache proxyObjectForUniqueFieldValue:uniqueFieldValue] managedObject];
-            newValue = managedObject;
+            JCProxyObject *proxyObject = [managedObjectCache proxyObjectForUniqueFieldValue:uniqueFieldValue];
+            NSManagedObject *managedObject = [proxyObject managedObject];
+            
+            if (managedObject != nil) {
+                newValue = managedObject;
+            }
+            else {
+                newValue = nil;
+                [proxyObject addManagedObject:[self managedObject] forInverseRelationship:[[relationship inverseRelationship] name]];
+            }
         }
     }
     
