@@ -47,6 +47,8 @@
     NSBundle *_bundle;
 }
 
+- (NSArray *)managedObjectsFromArray:(NSArray *)jsonObjects forEntity:(NSEntityDescription *)entity superUniqueFieldValue:(id)superUniqueFieldValue;
+
 - (NSArray *)managedObjectsFromJSONObject:(id)jsonObject forEntity:(NSEntityDescription *)entity;
 
 - (NSArray *)managedObjectIDsFromCache:(JCProxyObjectCache *)objectCache;
@@ -108,17 +110,7 @@
 
 - (NSArray *)managedObjectsFromArray:(NSArray *)jsonObjects forEntity:(NSEntityDescription *)entity {
     
-    JCProxyObjectCache *cache = [[JCProxyObjectCache alloc] initWithEntity:entity managedObjectContext:self.managedObjectContext bundle:self.bundle];
-    [cache addProxyObjectsFromJSONObjects:jsonObjects superUniqueFieldValue:nil];
-    
-    NSArray *resultIDs = [self managedObjectIDsFromCache:cache];
-    [cache release];
-    
-    NSMutableArray *results = [[NSMutableArray alloc] initWithCapacity:[resultIDs count]];
-    for (NSManagedObjectID *managedObjectID in resultIDs)
-        [results addObject:[self.managedObjectContext objectWithID:managedObjectID]];
-    
-    return [results autorelease];
+    return [self managedObjectsFromArray:jsonObjects forEntity:entity superUniqueFieldValue:nil];
 }
 
 - (id)managedObjectFromDictionary:(NSDictionary *)jsonObject forEntity:(NSEntityDescription *)entity {
@@ -132,6 +124,22 @@
 
 
 #pragma mark - Object Importing Private
+
+- (NSArray *)managedObjectsFromArray:(NSArray *)jsonObjects forEntity:(NSEntityDescription *)entity superUniqueFieldValue:(id)superUniqueFieldValue {
+    
+    JCProxyObjectCache *cache = [[JCProxyObjectCache alloc] initWithEntity:entity managedObjectContext:self.managedObjectContext bundle:self.bundle];
+    [cache addProxyObjectsFromJSONObjects:jsonObjects superUniqueFieldValue:superUniqueFieldValue];
+    
+    NSArray *resultIDs = [self managedObjectIDsFromCache:cache];
+    [cache release];
+    
+    NSMutableArray *results = [[NSMutableArray alloc] initWithCapacity:[resultIDs count]];
+    for (NSManagedObjectID *managedObjectID in resultIDs)
+        [results addObject:[self.managedObjectContext objectWithID:managedObjectID]];
+    
+    return [results autorelease];
+    
+}
 
 - (NSArray *)managedObjectsFromJSONObject:(id)jsonObject forEntity:(NSEntityDescription *)entity {
     

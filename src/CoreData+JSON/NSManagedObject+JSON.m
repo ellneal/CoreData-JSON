@@ -51,6 +51,7 @@
 
 @end
 
+
 @implementation NSManagedObject (JSON)
 
 + (id)managedObjectWithJSON:(NSString *)json entity:(NSEntityDescription *)entity managedObjectContext:(NSManagedObjectContext *)managedObjectContext {

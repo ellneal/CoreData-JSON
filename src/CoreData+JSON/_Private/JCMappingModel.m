@@ -257,10 +257,18 @@
 	NSMutableArray *argumentValues = [[NSMutableArray alloc] initWithCapacity:[arguments count]];
 	
 	for (NSString *mappedKey in arguments) {
-		if ([mappedKey isEqualToString:@"superUniqueFieldValue"])
-			[argumentValues addObject:superUniqueFieldValue];
-		else
+        
+		if ([mappedKey isEqualToString:@"superUniqueFieldValue"]) {
+            
+            if (superUniqueFieldValue != nil)
+                [argumentValues addObject:superUniqueFieldValue];
+            else
+                [argumentValues addObject:[NSNull null]];
+        }
+		else {
+            
 			[argumentValues addObject:[self valueForMappedPropertyName:mappedKey fromDictionary:dictionary]];
+        }
 	}
 	
 	NSString *result = [NSString stringWithFormat:formatString array:argumentValues];
