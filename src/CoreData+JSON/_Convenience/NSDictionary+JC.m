@@ -2,7 +2,7 @@
 //  NSDictionary+JC.m
 //  CoreData+JSON
 //
-//	Copyright (c) 2010, emdentec (Elliot Neal)
+//	Copyright (c) 2011, emdentec (Elliot Neal)
 //	All rights reserved.
 //
 //	Redistribution and use in source and binary forms, with or without

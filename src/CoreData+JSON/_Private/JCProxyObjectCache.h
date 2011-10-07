@@ -1,5 +1,5 @@
 //
-//  JCMManagedCache.h
+//  JCProxyObjectCache.h
 //  CoreData+JSON
 //
 //	Copyright (c) 2011, emdentec (Elliot Neal)
