@@ -31,24 +31,12 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-typedef enum {
-	JSONRelationshipMappingDoNotMap,
-	JSONRelationshipMappingMapUsingUniqueField,
-	JSONRelationshipMappingMapUsingJSON
-} JSONRelationshipMappingBehaviour;
-
 @interface NSManagedObject (JSON)
 
 + (id)managedObjectWithJSON:(NSString *)json entity:(NSEntityDescription *)entity managedObjectContext:(NSManagedObjectContext *)managedObjectContext;
-+ (id)managedObjectWithJSON:(NSString *)json entity:(NSEntityDescription *)entity managedObjectContext:(NSManagedObjectContext *)managedObjectContext superUniqueFieldValue:(id)superUniqueFieldValue;
-+ (id)managedObjectWithJSON:(NSString *)json entity:(NSEntityDescription *)entity managedObjectContext:(NSManagedObjectContext *)managedObjectContext superUniqueFieldValue:(id)superUniqueFieldValue bundle:(NSBundle *)bundleOrNil;
-
++ (id)managedObjectWithJSON:(NSString *)json entity:(NSEntityDescription *)entity managedObjectContext:(NSManagedObjectContext *)managedObjectContext bundle:(NSBundle *)bundleOrNil;
 
 + (id)managedObjectWithDictionary:(NSDictionary *)values entity:(NSEntityDescription *)entity managedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 + (id)managedObjectWithDictionary:(NSDictionary *)values entity:(NSEntityDescription *)entity managedObjectContext:(NSManagedObjectContext *)managedObjectContext bundle:(NSBundle *)bundleOrNil;
-+ (id)managedObjectWithDictionary:(NSDictionary *)values entity:(NSEntityDescription *)entity managedObjectContext:(NSManagedObjectContext *)managedObjectContext superUniqueFieldValue:(id)superUniqueFieldValue;
-+ (id)managedObjectWithDictionary:(NSDictionary *)values entity:(NSEntityDescription *)entity managedObjectContext:(NSManagedObjectContext *)managedObjectContext superUniqueFieldValue:(id)superUniqueFieldValue bundle:(NSBundle *)bundleOrNil;
-
-- (NSString *)JSONRepresentationWithToManyBehaviour:(JSONRelationshipMappingBehaviour)toManyBehaviour toOneBehaviour:(JSONRelationshipMappingBehaviour)toOneBehaviour;
 
 @end
