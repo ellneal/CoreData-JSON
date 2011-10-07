@@ -1,4 +1,4 @@
-__Copyright (c) 2010, emdentec (Elliot Neal)__
+__Copyright (c) 2011, emdentec (Elliot Neal)__
 
 All rights reserved.
 
