@@ -67,5 +67,6 @@
 - (void)testTransformedUniqueField;
 
 - (void)testFormatParsing;
+- (void)testToOneRelationshipObjectGeneration;
 
 @end

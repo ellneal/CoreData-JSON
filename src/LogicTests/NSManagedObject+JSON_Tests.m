@@ -36,6 +36,7 @@
 
 #import "NSEntityDescription+JC.h"
 
+#import "JCImporter.h"
 #import "JCMappingModel.h"
 
 #import "TestToDateValueTransformer.h"
@@ -108,16 +109,16 @@
 
 - (void)testInsertTestEntityWithDictionaryNoRelationships {
 	
-//	NSString *uniqueFieldValue = @"someUniqueValue";
-//	NSString *testAttributeValue = @"testAttributeValue";
-//	
-//	NSDictionary *values = [NSDictionary dictionaryWithObjectsAndKeys:uniqueFieldValue, mappedTestEntityUniqueFieldName, testAttributeValue, mappedTestEntityTestAttributeName, nil];
-//	
-//	NSManagedObject *managedObject = [NSManagedObject managedObjectWithDictionary:values entity:testEntity managedObjectContext:managedObjectContext bundle:bundle];
-//	
-//	STAssertNotNil(managedObject, nil);
-//	STAssertEqualObjects([managedObject valueForKey:testEntityUniqueFieldName], uniqueFieldValue, nil);
-//	STAssertEqualObjects([managedObject valueForKey:testEntityTestAttributeName], testAttributeValue, nil);
+	NSString *uniqueFieldValue = @"someUniqueValue";
+	NSString *testAttributeValue = @"testAttributeValue";
+	
+	NSDictionary *values = [NSDictionary dictionaryWithObjectsAndKeys:uniqueFieldValue, mappedTestEntityUniqueFieldName, testAttributeValue, mappedTestEntityTestAttributeName, nil];
+	
+	NSManagedObject *managedObject = [NSManagedObject managedObjectWithDictionary:values entity:testEntity managedObjectContext:managedObjectContext bundle:bundle];
+	
+	STAssertNotNil(managedObject, nil);
+	STAssertEqualObjects([managedObject valueForKey:testEntityUniqueFieldName], uniqueFieldValue, nil);
+	STAssertEqualObjects([managedObject valueForKey:testEntityTestAttributeName], testAttributeValue, nil);
 }
 
 - (void)testToManyRelationshipDefinedByUniqueKey {
@@ -247,6 +248,34 @@
 	
     NSString *expectedUniqueFieldValue = @"someUniqueValue_45_<null>";
 	STAssertTrue([[managedObject valueForKey:@"uniqueField"] isEqualToString:expectedUniqueFieldValue], @"%@ should be equal to %@", [managedObject valueForKey:@"uniqueField"], expectedUniqueFieldValue);
+}
+
+- (void)testToOneRelationshipObjectGeneration {
+	
+	NSNumber *uniqueFieldValue1 = [NSNumber numberWithInteger:0];
+    NSNumber *uniqueFieldValue2 = [NSNumber numberWithInteger:1];
+	NSString *parentEntityUniqueFieldValue = @"someUniqueValue";
+	NSString *parentEntityAttributeValue = @"someAttributeValue";
+	NSDictionary *toOneRelationshipValue = [NSDictionary dictionaryWithObjectsAndKeys:parentEntityUniqueFieldValue, mappedTestEntityUniqueFieldName, parentEntityAttributeValue, mappedTestEntityTestAttributeName, nil];
+	
+	NSDictionary *object1 = [NSDictionary dictionaryWithObjectsAndKeys:uniqueFieldValue1, mappedTestRelatedEntityUniqueFieldName, toOneRelationshipValue, mappedTestRelatedEntityTestToOneRelationshipName, nil];
+    NSDictionary *object2 = [NSDictionary dictionaryWithObjectsAndKeys:uniqueFieldValue2, mappedTestRelatedEntityUniqueFieldName, toOneRelationshipValue, mappedTestRelatedEntityTestToOneRelationshipName, nil];
+    
+    NSArray *importObjects = [NSArray arrayWithObjects:object1, object2, nil];
+    
+    JCImporter *importer = [[JCImporter alloc] initWithManagedObjectContext:managedObjectContext bundle:bundle];
+    NSArray *managedObjects = [importer managedObjectsFromArray:importObjects forEntity:testRelatedEntity];
+    [importer release];
+    
+    NSManagedObject *managedObject1 = [managedObjects objectAtIndex:0];
+    NSManagedObject *managedObject2 = [managedObjects objectAtIndex:1];
+    
+    NSManagedObject *relatedObject1 = [managedObject1 valueForKey:testRelatedEntityTestToOneRelationshipName];
+    NSManagedObject *relatedObject2 = [managedObject2 valueForKey:testRelatedEntityTestToOneRelationshipName];
+    
+    STAssertNotNil(relatedObject1, nil);
+    STAssertNotNil(relatedObject2, nil);
+    STAssertEqualObjects(relatedObject1, relatedObject2, nil);
 }
 
 @end
