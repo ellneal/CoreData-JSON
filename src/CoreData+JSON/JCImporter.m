@@ -166,7 +166,7 @@
     if (!useImportBatching)
         importBatchSize = [objectCache count];
     
-    NSUInteger numberOfBatches = (useImportBatching ? ceilf(objectCount / importBatchSize) : 1);
+    NSUInteger numberOfBatches = (useImportBatching && objectCount > importBatchSize ? ceilf(objectCount / importBatchSize) : 1);
     NSMutableArray *batches = [[NSMutableArray alloc] initWithCapacity:numberOfBatches];
     
     for (int i = 0; i < numberOfBatches; i++) {
