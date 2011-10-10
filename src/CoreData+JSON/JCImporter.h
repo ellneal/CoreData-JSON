@@ -45,5 +45,6 @@
 
 @property (nonatomic) NSUInteger importBatchSize;
 @property (nonatomic) NSUInteger saveBatchSize;
+@property (nonatomic) BOOL resetManagedObjectContext; //default YES
 
 @end

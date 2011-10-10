@@ -65,6 +65,7 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize importBatchSize = _importBatchSize;
 @synthesize saveBatchSize = _saveBatchSize;
+@synthesize resetManagedObjectContext = _resetManagedObjectContext;
 
 @synthesize bundle = _bundle;
 
@@ -78,6 +79,7 @@
         _managedObjectContext = [managedObjectContext retain];
         _importBatchSize = 0;
         _saveBatchSize = 0;
+        _resetManagedObjectContext = YES;
         _bundle = [bundleOrNil retain];
     }
     return self;
@@ -229,7 +231,9 @@
         if (useImportBatching) {
             
             [self.managedObjectContext save:nil];
-            [self.managedObjectContext reset];
+
+            if (self.resetManagedObjectContext)
+                [self.managedObjectContext reset];
         }
         
         [pool drain];
