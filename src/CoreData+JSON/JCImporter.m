@@ -79,7 +79,7 @@
         _managedObjectContext = [managedObjectContext retain];
         _importBatchSize = 0;
         _saveBatchSize = 0;
-        _resetManagedObjectContext = YES;
+        _resetManagedObjectContext = NO;
         _bundle = [bundleOrNil retain];
     }
     return self;
