@@ -501,7 +501,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0410;
+				LastUpgradeCheck = 0420;
 			};
 			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "CoreData+JSON" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -801,7 +801,7 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				INFOPLIST_FILE = "CoreData+JSON_PerformanceTests/CoreData+JSON_PerformanceTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
@@ -823,7 +823,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoreData+JSON_PerformanceTests/CoreData+JSON_PerformanceTests-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				INFOPLIST_FILE = "CoreData+JSON_PerformanceTests/CoreData+JSON_PerformanceTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;

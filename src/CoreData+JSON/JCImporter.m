@@ -47,11 +47,11 @@
     NSBundle *_bundle;
 }
 
-- (NSArray *)managedObjectsFromArray:(NSArray *)jsonObjects forEntity:(NSEntityDescription *)entity superUniqueFieldValue:(id)superUniqueFieldValue;
+- (NSArray *)managedObjectsFromArray:(NSArray *)jsonObjects forEntity:(NSEntityDescription *)entity superUniqueFieldValue:(id)superUniqueFieldValue error:(NSError **)error;
 
-- (NSArray *)managedObjectsFromJSONObject:(id)jsonObject forEntity:(NSEntityDescription *)entity;
+- (NSArray *)managedObjectsFromJSONObject:(id)jsonObject forEntity:(NSEntityDescription *)entity error:(NSError **)error;
 
-- (NSArray *)managedObjectIDsFromCache:(JCProxyObjectCache *)objectCache;
+- (NSArray *)managedObjectIDsFromCache:(JCProxyObjectCache *)objectCache error:(NSError **)error;
 
 
 @property (nonatomic, readonly) NSManagedObjectContext *managedObjectContext;
@@ -96,28 +96,28 @@
 
 #pragma mark - Object Importing Public
 
-- (NSArray *)managedObjectsFromJSONData:(NSData *)jsonData forEntity:(NSEntityDescription *)entity {
+- (NSArray *)managedObjectsFromJSONData:(NSData *)jsonData forEntity:(NSEntityDescription *)entity error:(NSError **)error {
     
     id jsonObject = [jsonData objectFromJSONData];
     
-    return [self managedObjectsFromJSONObject:jsonObject forEntity:entity];
+    return [self managedObjectsFromJSONObject:jsonObject forEntity:entity error:error];
 }
 
-- (NSArray *)managedObjectsFromJSONString:(NSString *)jsonString forEntity:(NSEntityDescription *)entity {
+- (NSArray *)managedObjectsFromJSONString:(NSString *)jsonString forEntity:(NSEntityDescription *)entity error:(NSError **)error {
 
     id jsonObject = [jsonString objectFromJSONString];
     
-    return [self managedObjectsFromJSONObject:jsonObject forEntity:entity];
+    return [self managedObjectsFromJSONObject:jsonObject forEntity:entity error:error];
 }
 
-- (NSArray *)managedObjectsFromArray:(NSArray *)jsonObjects forEntity:(NSEntityDescription *)entity {
+- (NSArray *)managedObjectsFromArray:(NSArray *)jsonObjects forEntity:(NSEntityDescription *)entity error:(NSError **)error {
     
-    return [self managedObjectsFromArray:jsonObjects forEntity:entity superUniqueFieldValue:nil];
+    return [self managedObjectsFromArray:jsonObjects forEntity:entity superUniqueFieldValue:nil error:error];
 }
 
-- (NSManagedObject *)managedObjectFromDictionary:(NSDictionary *)jsonObject forEntity:(NSEntityDescription *)entity {
+- (NSManagedObject *)managedObjectFromDictionary:(NSDictionary *)jsonObject forEntity:(NSEntityDescription *)entity error:(NSError **)error {
     
-    NSArray *results = [self managedObjectsFromArray:[NSArray arrayWithObject:jsonObject] forEntity:entity];
+    NSArray *results = [self managedObjectsFromArray:[NSArray arrayWithObject:jsonObject] forEntity:entity error:error];
     if ([results count] > 0)
         return [results objectAtIndex:0];
     
@@ -127,12 +127,12 @@
 
 #pragma mark - Object Importing Private
 
-- (NSArray *)managedObjectsFromArray:(NSArray *)jsonObjects forEntity:(NSEntityDescription *)entity superUniqueFieldValue:(id)superUniqueFieldValue {
+- (NSArray *)managedObjectsFromArray:(NSArray *)jsonObjects forEntity:(NSEntityDescription *)entity superUniqueFieldValue:(id)superUniqueFieldValue error:(NSError **)error {
     
     JCProxyObjectCache *cache = [[JCProxyObjectCache alloc] initWithEntity:entity managedObjectContext:self.managedObjectContext bundle:self.bundle];
     [cache addProxyObjectsFromJSONObjects:jsonObjects superUniqueFieldValue:superUniqueFieldValue];
     
-    NSArray *resultIDs = [self managedObjectIDsFromCache:cache];
+    NSArray *resultIDs = [self managedObjectIDsFromCache:cache error:error];
     [cache release];
     
     NSMutableArray *results = [[NSMutableArray alloc] initWithCapacity:[resultIDs count]];
@@ -143,7 +143,7 @@
     
 }
 
-- (NSArray *)managedObjectsFromJSONObject:(id)jsonObject forEntity:(NSEntityDescription *)entity {
+- (NSArray *)managedObjectsFromJSONObject:(id)jsonObject forEntity:(NSEntityDescription *)entity error:(NSError **)error {
     
     NSArray *jsonObjects = nil;
     
@@ -152,10 +152,10 @@
     else
         jsonObjects = jsonObject;
     
-    return [self managedObjectsFromArray:jsonObjects forEntity:entity];
+    return [self managedObjectsFromArray:jsonObjects forEntity:entity error:error];
 }
 
-- (NSArray *)managedObjectIDsFromCache:(JCProxyObjectCache *)objectCache {
+- (NSArray *)managedObjectIDsFromCache:(JCProxyObjectCache *)objectCache error:(NSError **)error {
     
     NSMutableArray *managedObjects = [[NSMutableArray alloc] initWithCapacity:[objectCache count]];
     
@@ -226,7 +226,7 @@
         }
         
         for (JCProxyObjectCache *relationshipCache in [relationshipCaches allValues])
-            [self managedObjectIDsFromCache:relationshipCache];
+            [self managedObjectIDsFromCache:relationshipCache error:error];
         
         if (useImportBatching) {
             

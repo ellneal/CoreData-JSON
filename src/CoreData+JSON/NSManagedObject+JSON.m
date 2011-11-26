@@ -47,7 +47,7 @@
 + (id)managedObjectWithDictionary:(NSDictionary *)values entity:(NSEntityDescription *)entity managedObjectContext:(NSManagedObjectContext *)managedObjectContext bundle:(NSBundle *)bundleOrNil {
 	
 	JCImporter *importer = [[JCImporter alloc] initWithManagedObjectContext:managedObjectContext bundle:bundleOrNil];
-    id result = [importer managedObjectFromDictionary:values forEntity:entity];
+    id result = [importer managedObjectFromDictionary:values forEntity:entity error:nil];
     [importer release];
     
     return result;
