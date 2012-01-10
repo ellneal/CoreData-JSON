@@ -38,13 +38,17 @@
 
 //  batchSize will be used while importing the root objects, and objects in any to-many relationship
 //  batchSize 0 means do not batch
-- (NSArray *)managedObjectsFromJSONData:(NSData *)jsonData forEntity:(NSEntityDescription *)entity error:(NSError **)error;
-- (NSArray *)managedObjectsFromJSONString:(NSString *)jsonString forEntity:(NSEntityDescription *)entity error:(NSError **)error;
-- (NSArray *)managedObjectsFromArray:(NSArray *)jsonObjects forEntity:(NSEntityDescription *)entity error:(NSError **)error;
-- (NSManagedObject *)managedObjectFromDictionary:(NSDictionary *)jsonObject forEntity:(NSEntityDescription *)entity error:(NSError **)error;
+- (NSArray *)managedObjectsFromJSONData:(NSData *)jsonData forEntity:(NSEntityDescription *)entity;
+- (NSArray *)managedObjectsFromJSONString:(NSString *)jsonString forEntity:(NSEntityDescription *)entity;
+- (NSArray *)managedObjectsFromArray:(NSArray *)jsonObjects forEntity:(NSEntityDescription *)entity;
+- (NSManagedObject *)managedObjectFromDictionary:(NSDictionary *)jsonObject forEntity:(NSEntityDescription *)entity;
 
 @property (nonatomic) NSUInteger importBatchSize;
 @property (nonatomic) NSUInteger saveBatchSize;
+@property (nonatomic) BOOL resetManagedObjectContext; //default NO
+
+@end
+Integer saveBatchSize;
 @property (nonatomic) BOOL resetManagedObjectContext; //default NO
 
 @end

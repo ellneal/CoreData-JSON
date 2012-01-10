@@ -278,4 +278,35 @@
     STAssertEqualObjects(relatedObject1, relatedObject2, nil);
 }
 
+- (void)testToOneRelationshipObjectFetching {
+	
+	NSNumber *uniqueFieldValue1 = [NSNumber numberWithInteger:0];
+    NSNumber *uniqueFieldValue2 = [NSNumber numberWithInteger:1];
+	NSString *parentEntityUniqueFieldValue = @"someUniqueValue";
+	NSString *parentEntityAttributeValue = @"someAttributeValue";
+	NSDictionary *toOneRelationshipValue = [NSDictionary dictionaryWithObjectsAndKeys:parentEntityUniqueFieldValue, mappedTestEntityUniqueFieldName, parentEntityAttributeValue, mappedTestEntityTestAttributeName, nil];
+	
+	NSDictionary *object1 = [NSDictionary dictionaryWithObjectsAndKeys:uniqueFieldValue1, mappedTestRelatedEntityUniqueFieldName, toOneRelationshipValue, mappedTestRelatedEntityTestToOneRelationshipName, nil];
+    NSDictionary *object2 = [NSDictionary dictionaryWithObjectsAndKeys:uniqueFieldValue2, mappedTestRelatedEntityUniqueFieldName, toOneRelationshipValue, mappedTestRelatedEntityTestToOneRelationshipName, nil];
+    
+    NSArray *importObjects = [NSArray arrayWithObjects:object1, object2, nil];
+    
+    JCImporter *importer = [[JCImporter alloc] initWithManagedObjectContext:managedObjectContext bundle:bundle];
+    
+    [importer managedObjectFromDictionary:toOneRelationshipValue forEntity:testEntity];
+    
+    NSArray *managedObjects = [importer managedObjectsFromArray:importObjects forEntity:testRelatedEntity];
+    [importer release];
+    
+    NSManagedObject *managedObject1 = [managedObjects objectAtIndex:0];
+    NSManagedObject *managedObject2 = [managedObjects objectAtIndex:1];
+    
+    NSManagedObject *relatedObject1 = [managedObject1 valueForKey:testRelatedEntityTestToOneRelationshipName];
+    NSManagedObject *relatedObject2 = [managedObject2 valueForKey:testRelatedEntityTestToOneRelationshipName];
+    
+    STAssertNotNil(relatedObject1, nil);
+    STAssertNotNil(relatedObject2, nil);
+    STAssertEqualObjects(relatedObject1, relatedObject2, nil);
+}
+
 @end

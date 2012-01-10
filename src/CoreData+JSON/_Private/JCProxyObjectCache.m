@@ -104,6 +104,8 @@
     [_managedObjectContext release];
     [_mappingModel release];
     
+    [_proxyObjects release];
+    
     [super dealloc];
 }
 
@@ -269,9 +271,12 @@
                 id jsonObject = relationshipValue;
                 id uniqueFieldValue = [relationshipCache uniqueFieldValueForJSONObject:jsonObject superUniqueFieldValue:superUniqueFieldValue];
                 
-                JCProxyObject *proxyObject = [[JCProxyObject alloc] initWithEntity:destinationEntity inManagedObjectContext:self.managedObjectContext uniqueFieldValue:uniqueFieldValue superUniqueFieldValue:superUniqueFieldValue jsonObject:jsonObject bundle:self.bundle];
-                [relationshipCache addProxyObject:proxyObject];
-                [proxyObject release];
+                if ([relationshipCache proxyObjectForUniqueFieldValue:uniqueFieldValue] == nil) {
+                    
+                    JCProxyObject *proxyObject = [[JCProxyObject alloc] initWithEntity:destinationEntity inManagedObjectContext:self.managedObjectContext uniqueFieldValue:uniqueFieldValue superUniqueFieldValue:superUniqueFieldValue jsonObject:jsonObject bundle:self.bundle];
+                    [relationshipCache addProxyObject:proxyObject];
+                    [proxyObject release];
+                }
             }
         }
         

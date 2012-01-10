@@ -68,5 +68,6 @@
 
 - (void)testFormatParsing;
 - (void)testToOneRelationshipObjectGeneration;
+- (void)testToOneRelationshipObjectFetching;
 
 @end

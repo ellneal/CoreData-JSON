@@ -47,11 +47,11 @@
     NSBundle *_bundle;
 }
 
-- (NSArray *)managedObjectsFromArray:(NSArray *)jsonObjects forEntity:(NSEntityDescription *)entity superUniqueFieldValue:(id)superUniqueFieldValue error:(NSError **)error;
+- (NSArray *)managedObjectsFromArray:(NSArray *)jsonObjects forEntity:(NSEntityDescription *)entity superUniqueFieldValue:(id)superUniqueFieldValue;
 
-- (NSArray *)managedObjectsFromJSONObject:(id)jsonObject forEntity:(NSEntityDescription *)entity error:(NSError **)error;
+- (NSArray *)managedObjectsFromJSONObject:(id)jsonObject forEntity:(NSEntityDescription *)entity;
 
-- (NSArray *)managedObjectIDsFromCache:(JCProxyObjectCache *)objectCache error:(NSError **)error;
+- (NSArray *)managedObjectIDsFromCache:(JCProxyObjectCache *)objectCache;
 
 
 @property (nonatomic, readonly) NSManagedObjectContext *managedObjectContext;
@@ -96,28 +96,28 @@
 
 #pragma mark - Object Importing Public
 
-- (NSArray *)managedObjectsFromJSONData:(NSData *)jsonData forEntity:(NSEntityDescription *)entity error:(NSError **)error {
+- (NSArray *)managedObjectsFromJSONData:(NSData *)jsonData forEntity:(NSEntityDescription *)entity {
     
     id jsonObject = [jsonData objectFromJSONData];
     
-    return [self managedObjectsFromJSONObject:jsonObject forEntity:entity error:error];
+    return [self managedObjectsFromJSONObject:jsonObject forEntity:entity];
 }
 
-- (NSArray *)managedObjectsFromJSONString:(NSString *)jsonString forEntity:(NSEntityDescription *)entity error:(NSError **)error {
+- (NSArray *)managedObjectsFromJSONString:(NSString *)jsonString forEntity:(NSEntityDescription *)entity {
 
     id jsonObject = [jsonString objectFromJSONString];
     
-    return [self managedObjectsFromJSONObject:jsonObject forEntity:entity error:error];
+    return [self managedObjectsFromJSONObject:jsonObject forEntity:entity];
 }
 
-- (NSArray *)managedObjectsFromArray:(NSArray *)jsonObjects forEntity:(NSEntityDescription *)entity error:(NSError **)error {
+- (NSArray *)managedObjectsFromArray:(NSArray *)jsonObjects forEntity:(NSEntityDescription *)entity {
     
-    return [self managedObjectsFromArray:jsonObjects forEntity:entity superUniqueFieldValue:nil error:error];
+    return [self managedObjectsFromArray:jsonObjects forEntity:entity superUniqueFieldValue:nil];
 }
 
-- (NSManagedObject *)managedObjectFromDictionary:(NSDictionary *)jsonObject forEntity:(NSEntityDescription *)entity error:(NSError **)error {
+- (NSManagedObject *)managedObjectFromDictionary:(NSDictionary *)jsonObject forEntity:(NSEntityDescription *)entity {
     
-    NSArray *results = [self managedObjectsFromArray:[NSArray arrayWithObject:jsonObject] forEntity:entity error:error];
+    NSArray *results = [self managedObjectsFromArray:[NSArray arrayWithObject:jsonObject] forEntity:entity];
     if ([results count] > 0)
         return [results objectAtIndex:0];
     
@@ -127,12 +127,12 @@
 
 #pragma mark - Object Importing Private
 
-- (NSArray *)managedObjectsFromArray:(NSArray *)jsonObjects forEntity:(NSEntityDescription *)entity superUniqueFieldValue:(id)superUniqueFieldValue error:(NSError **)error {
+- (NSArray *)managedObjectsFromArray:(NSArray *)jsonObjects forEntity:(NSEntityDescription *)entity superUniqueFieldValue:(id)superUniqueFieldValue {
     
     JCProxyObjectCache *cache = [[JCProxyObjectCache alloc] initWithEntity:entity managedObjectContext:self.managedObjectContext bundle:self.bundle];
     [cache addProxyObjectsFromJSONObjects:jsonObjects superUniqueFieldValue:superUniqueFieldValue];
     
-    NSArray *resultIDs = [self managedObjectIDsFromCache:cache error:error];
+    NSArray *resultIDs = [self managedObjectIDsFromCache:cache];
     [cache release];
     
     NSMutableArray *results = [[NSMutableArray alloc] initWithCapacity:[resultIDs count]];
@@ -143,7 +143,7 @@
     
 }
 
-- (NSArray *)managedObjectsFromJSONObject:(id)jsonObject forEntity:(NSEntityDescription *)entity error:(NSError **)error {
+- (NSArray *)managedObjectsFromJSONObject:(id)jsonObject forEntity:(NSEntityDescription *)entity {
     
     NSArray *jsonObjects = nil;
     
@@ -152,10 +152,10 @@
     else
         jsonObjects = jsonObject;
     
-    return [self managedObjectsFromArray:jsonObjects forEntity:entity error:error];
+    return [self managedObjectsFromArray:jsonObjects forEntity:entity];
 }
 
-- (NSArray *)managedObjectIDsFromCache:(JCProxyObjectCache *)objectCache error:(NSError **)error {
+- (NSArray *)managedObjectIDsFromCache:(JCProxyObjectCache *)objectCache {
     
     NSMutableArray *managedObjects = [[NSMutableArray alloc] initWithCapacity:[objectCache count]];
     
@@ -164,6 +164,11 @@
     NSUInteger objectCount = [objectCache count];
     BOOL useImportBatching = importBatchSize > 0;
     BOOL useSaveBatching = (useImportBatching && (importBatchSize != saveBatchSize));
+    
+    if (objectCount == 0) {
+        [managedObjects release];
+        return nil;
+    }
     
     if (!useImportBatching)
         importBatchSize = [objectCache count];
@@ -215,6 +220,7 @@
             for (NSString *relationshipName in relationships) {
                 
                 JCProxyObjectCache *relationshipCache = [relationshipCaches objectForKey:relationshipName];
+                [relationshipCache fetchManagedObjects];
                 [proxyObject updateRelationship:relationshipName fromManagedObjectCache:relationshipCache];
             }
             
@@ -226,11 +232,26 @@
         }
         
         for (JCProxyObjectCache *relationshipCache in [relationshipCaches allValues])
-            [self managedObjectIDsFromCache:relationshipCache error:error];
+            [self managedObjectIDsFromCache:relationshipCache];
         
         if (useImportBatching) {
             
             [self.managedObjectContext save:nil];
+
+            if (self.resetManagedObjectContext)
+                [self.managedObjectContext reset];
+        }
+        
+        [pool drain];
+    }
+    
+    [batches release];
+    
+    return [managedObjects autorelease];
+}
+
+@end
+
 
             if (self.resetManagedObjectContext)
                 [self.managedObjectContext reset];
